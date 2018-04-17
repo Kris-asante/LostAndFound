@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ReportItemFragment"
+    android:background="@drawable/reportbgpic2"
+    android:orientation="vertical">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/lostItem"
+            style="@android:style/Widget.DeviceDefault.Light.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="88dp"
+            android:background="@color/colorPrimary"
+            android:text="@string/i_lost"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/foundItem"
+            style="@android:style/Widget.DeviceDefault.Light.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/lostItem"
+            android:layout_below="@+id/lostItem"
+            android:layout_marginTop="141dp"
+            android:background="@color/colorPrimary"
+            android:text="@string/i_found"
+            android:textColor="#ffffff" />
+
+
+    </RelativeLayout>
+
+
+</FrameLayout>

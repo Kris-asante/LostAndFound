@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">LOST&amp;FOUND</string>
+    <string name="lost_an_item_or_found_a_missing_item">Lost an item or found a missing item...</string>
+    <string name="best_platform_to_make_a_report">best platform to make a report</string>
+    <string name="get_started">Get Started</string>
+    <string name="welcome">Welcome! </string>
+    <string name="sign_in_with_google_account">Sign In With Google Account</string>
+    <string name="name_display">Name Display</string>
+    <string name="email_display">Email Display</string>
+    <string name="logout_account">Logout Account</string>
+    <string name="nextFromSignIn">Next</string>
+    <string name="title_activity_ankasa">LOST&amp;FOUND</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_aboutUs">About Us</string>
+
+
+    <string name="signInMessage">easily and quickly report about lost,stolen or found things;\n
+            \n show locations of losses on a map;\n
+            \n create your own lists of reports;\n
+            \n use different pins for reports;\n
+            \n store, edit and share reports;\n
+            \n make photos of things.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="news_feed">News Feed</string>
+    <string name="make_a_report">Make A Report</string>
+    <string name="i_lost">I LOST</string>
+    <string name="i_found">I FOUND</string>
+    <string name="report">REPORT</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="phone_number">Phone number</string>
+    <string name="description">Description</string>
+    <string name="upload_photo">Upload Photo</string>
+    <string name="location">Location</string>
+    <string name="todo">TODO</string>
+    <string name="title_activity_basic">Basic</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+</resources>
+
