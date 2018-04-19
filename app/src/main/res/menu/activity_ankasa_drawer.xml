@@ -19,10 +19,7 @@
             android:id="@+id/nav_myvenue"
             android:icon="@drawable/ic_my_location_black_24dp"
             android:title="My Venue" />
-        <item
-            android:id="@+id/nav_logout"
-            android:icon="@drawable/ic_logout_black_24dp"
-            android:title="Logout" />
+
     </group>
 
     <item android:title="Identity Cards">

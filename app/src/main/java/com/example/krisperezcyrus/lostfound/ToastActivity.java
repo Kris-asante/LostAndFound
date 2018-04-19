@@ -31,7 +31,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 public class ToastActivity extends AppCompatActivity {
 
-    private static final String TAG = "TAG";
+    private static final String TAG = "ACTIO";
     private SignInButton googleBtn;
     private FirebaseAuth mAuth;
     private final static int RC_SIGN_IN = 2;
@@ -150,10 +150,13 @@ public class ToastActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             //updateUI(user);
+                            Intent intent = new Intent(ToastActivity.this,Ankasa.class);
+                            startActivity(intent);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());

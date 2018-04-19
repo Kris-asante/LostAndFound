@@ -14,8 +14,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class Ankasa extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,8 @@ public class Ankasa extends AppCompatActivity
 
         navigationView.setCheckedItem(R.id.nav_home);
 
+        mAuth = FirebaseAuth.getInstance();
+
     }
 
     public void setActionBarTitle (String title){
@@ -81,10 +86,13 @@ public class Ankasa extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings)
+        if (id == R.id.logout_account)
+
+
         //will change this to about us
             {
-            return true;
+                mAuth.signOut();
+            return false;
         }
 
         return super.onOptionsItemSelected(item);
@@ -116,10 +124,6 @@ public class Ankasa extends AppCompatActivity
 
         } else if (id == R.id.nav_studentID) {
 
-
-        } else if (id == R.id.nav_logout) {
-            Intent i = new Intent(Ankasa.this,ToastActivity.class);
-            startActivity(i);
 
         }
 
