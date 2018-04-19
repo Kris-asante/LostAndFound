@@ -1,9 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ILostActivity">
 
-</android.support.constraint.ConstraintLayout>
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="288dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="64dp"
+        android:hint="@string/your_name"
+        android:inputType="textEmailAddress"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="288dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp"
+        android:hint="@string/your_email"
+        android:inputType="textEmailAddress"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/phone"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="167dp"
+        android:ems="10"
+        android:hint="@string/your_phone_number"
+        android:inputType="phone"
+        android:textSize="14sp" />
+
+
+
+    <TextView
+        android:id="@+id/ilosttextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/email"
+        android:layout_marginStart="109dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/i_lost"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/descriptionTextView"
+        android:layout_width="293dp"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/email"
+        android:layout_marginTop="221dp"
+        android:ems="10"
+        android:hint="@string/description"
+        android:inputType="textAutoCorrect|textMultiLine|textLongMessage"
+        android:selectAllOnFocus="false"
+        android:singleLine="false"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/camerabutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="120dp"
+        android:layout_marginEnd="12dp"
+        android:drawableStart="@drawable/ic_menu_camera"
+        android:text="@string/if_any_upload_photo" />
+
+
+    <ImageView
+        android:id="@+id/Cameraimageview"
+        android:layout_width="141dp"
+        android:layout_height="132dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="61dp"
+        android:layout_marginEnd="-109dp"
+        android:layout_toStartOf="@+id/ilosttextView"
+        android:contentDescription="@string/todo" />
+
+    <Button
+        android:id="@+id/ilostreportbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/email"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="31dp"
+        android:text="@string/report_lost" />
+
+</RelativeLayout>
