@@ -25,10 +25,27 @@
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value=".Ankasa" />
+
         <activity android:name=".IFoundActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Ankasa" />
+        </activity>
+        <activity
+            android:name=".HomeLostActivity"
+            android:label="@string/title_activity_home_lost"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeLostActivity" />
+        </activity>
+        <activity
+            android:name=".HomeFoundActivity"
+            android:label="@string/title_activity_home_found"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeFoundActivity" />
         </activity>
     </application>
 

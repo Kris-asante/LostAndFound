@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static com.example.krisperezcyrus.lostfound.R.id.startButton;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button startbutton;
@@ -21,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        startbutton = findViewById(R.id.startButton);
+        startbutton = findViewById(startButton);
 
         startbutton.setOnClickListener(this);
 
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.startButton:
+            case startButton:
                 log.d("action","Get Started button pushed");
                 Intent intent = new Intent(MainActivity.this,ToastActivity.class);
                 Toast.makeText(this,"Please Sign in With Google",Toast.LENGTH_LONG).show();

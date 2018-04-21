@@ -22,7 +22,7 @@
 
         <Button
             android:id="@+id/homelostbtn"
-            style="@android:style/Widget.Button.Transparent"
+            style="@android:style/Widget.DeviceDefault.Button"
             android:layout_width="187dp"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -33,7 +33,7 @@
 
         <Button
             android:id="@+id/homefoundbtn"
-            style="@android:style/Widget.Button.Transparent"
+            style="@android:style/Widget.DeviceDefault.Button"
             android:layout_width="197dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
