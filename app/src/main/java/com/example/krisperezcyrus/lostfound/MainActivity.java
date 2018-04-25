@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case startButton:
                 log.d("action","Get Started button pushed");
                 Intent intent = new Intent(MainActivity.this,ToastActivity.class);
-                Toast.makeText(this,"Please Sign in With Google",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"Internet Connection Required",Toast.LENGTH_LONG).show();
                 startActivity(intent);
                 break;
 

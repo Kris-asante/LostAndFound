@@ -9,18 +9,18 @@
 
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/name"
         android:layout_width="288dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="64dp"
         android:hint="@string/your_name"
-        android:inputType="textEmailAddress"
+        android:inputType="text"
         android:textSize="14sp" />
 
     <EditText
-        android:id="@+id/name"
+        android:id="@+id/email"
         android:layout_width="288dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -79,18 +79,18 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="120dp"
-        android:layout_marginEnd="12dp"
         android:drawableStart="@drawable/ic_menu_camera"
+        android:onClick="cameraUpload"
         android:text="@string/upload_photo_from_gallary" />
 
 
     <ImageView
         android:id="@+id/Cameraimageview"
-        android:layout_width="141dp"
-        android:layout_height="132dp"
+        android:layout_width="150dp"
+        android:layout_height="139dp"
         android:layout_alignParentBottom="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="61dp"
+        android:layout_marginBottom="14dp"
         android:layout_marginEnd="-109dp"
         android:layout_toStartOf="@+id/ilosttextView"
         android:contentDescription="@string/todo" />
@@ -99,21 +99,12 @@
         android:id="@+id/ilostreportbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/email"
+        android:layout_alignEnd="@+id/name"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="31dp"
-        android:text="@string/report_lost"
-        android:onClick="buttonClicked"/>
+        android:layout_marginBottom="28dp"
+        android:onClick="buttonClicked"
+        android:text="@string/report_lost" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/camerabutton"
-        android:layout_marginEnd="22dp"
-        android:layout_marginTop="-120dp"
-        android:text="@string/todo"
-        android:textSize="18sp" />
+
 
 </RelativeLayout>

@@ -39,6 +39,7 @@
     <string name="your_phone_number">Your Phone number</string>
     <string name="description">Description</string>
     <string name="upload_photo_from_gallary">Upload From Gallary</string>
+    <string name="capture_photo">Capture</string>
     <string name="whereyouthinkyoulostit">Where You Lost It</string>
 
     <string name="title_activity_basic">Basic</string>
@@ -49,6 +50,7 @@
     <string name="lost_items">Lost Items</string>
     <string name="found_items">Found Items</string>
     <string name="report_lost">Report Lost</string>
+    <string name="report_found">Report Found</string>
     <string name="todo">TODO</string>
     <string name="title_activity_home_lost">Lost Items</string>
     <string name="title_activity_home_found">Found Items</string>
