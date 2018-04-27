@@ -92,6 +92,7 @@ private FirebaseAuth mAuth;
         //will change this to about us
             {
                 mAuth.signOut();
+                startActivity(new Intent(Ankasa.this,ToastActivity.class));
             return false;
         }
 

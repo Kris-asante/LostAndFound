@@ -57,16 +57,13 @@
 
     <EditText
         android:id="@+id/descriptionTextView"
-        android:layout_width="295dp"
-        android:layout_height="83dp"
+        android:layout_width="298dp"
+        android:layout_height="59dp"
 
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/email"
-        android:layout_marginStart="-2dp"
-        android:layout_marginTop="221dp"
+        android:layout_centerInParent="true"
         android:ems="10"
-        android:hint="@string/description"
         android:gravity="bottom"
+        android:hint="@string/description"
         android:inputType="textAutoCorrect|textMultiLine|textLongMessage"
         android:selectAllOnFocus="false"
         android:singleLine="false"
@@ -78,7 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="120dp"
+        android:layout_marginBottom="160dp"
         android:drawableStart="@drawable/ic_menu_camera"
         android:onClick="cameraUpload"
         android:text="@string/upload_photo_from_gallary" />
@@ -102,7 +99,7 @@
         android:layout_alignEnd="@+id/name"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="28dp"
-        android:onClick="buttonClicked"
+        android:onClick="ilostbuttonClicked"
         android:text="@string/report_lost" />
 
 

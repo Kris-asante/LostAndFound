@@ -38,7 +38,7 @@ public class ILostActivity extends AppCompatActivity  {
     private DatabaseReference databaseReference;
 
     private StorageReference storageReference;
-    private static final int GALLARY_INTENT = 1;
+    private static final int GALLARY_INTENT = 5;
     private ImageView imageView;
     Uri uri;
     //private ArrayList<String> mDetails = new ArrayList<>();
@@ -61,10 +61,12 @@ public class ILostActivity extends AppCompatActivity  {
        editTextphone =  findViewById(R.id.phone);
        editTextdescription = findViewById(R.id.descriptionTextView);
 
+        imageView = findViewById(R.id.Cameraimageview);
+
 
         databaseReference = database.getInstance().getReference().child("Lost");
 
-        imageView = findViewById(R.id.Cameraimageview);
+
         storageReference = FirebaseStorage.getInstance().getReference();
 
         /*listView =(ListView)findViewById(R.id.lostListView);
@@ -124,7 +126,9 @@ public class ILostActivity extends AppCompatActivity  {
     }
 
 
-    public void buttonClicked(View view){
+    public void ilostbuttonClicked(View view){
+
+
 
 
         final String yourname = editTextname.getText().toString().trim();
@@ -142,6 +146,7 @@ public class ILostActivity extends AppCompatActivity  {
        // databaseReference.child("Description").push().setValue(editTextdescription.getText().toString());
 
 
+
         if (!TextUtils.isEmpty(yourname) && !TextUtils.isEmpty(youremail) && !TextUtils.isEmpty(yourphone) && !TextUtils.isEmpty(yourdescription)){
 
             // this is for upload of image to the cloud
@@ -149,14 +154,14 @@ public class ILostActivity extends AppCompatActivity  {
             filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Uri downloadurl = taskSnapshot.getDownloadUrl();
+                    final Uri downloadurl = taskSnapshot.getDownloadUrl();
                     Toast.makeText(ILostActivity.this,"Image Upload Successful",Toast.LENGTH_LONG).show();
                     DatabaseReference newPost = databaseReference.push();
-                    newPost.child("Name").setValue(yourname);
-                    newPost.child("Email").setValue(youremail);
-                    newPost.child("Phone").setValue(yourphone);
-                    newPost.child("Description").setValue(yourdescription);
-                    newPost.child("Image").setValue(downloadurl).toString();
+                    newPost.child("name").setValue(yourname);
+                    newPost.child("email").setValue(youremail);
+                    newPost.child("phone").setValue(yourphone);
+                    newPost.child("description").setValue(yourdescription);
+                    newPost.child("image").setValue(downloadurl.toString());
 
                 }
             });
@@ -186,6 +191,7 @@ public class ILostActivity extends AppCompatActivity  {
 
             uri = data.getData();
             imageView.setImageURI(uri);
+
 
 
         }

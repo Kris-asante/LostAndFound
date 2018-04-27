@@ -80,6 +80,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="120dp"
         android:layout_marginEnd="12dp"
+        android:onClick="camerabuttonClicked"
         android:drawableStart="@drawable/ic_menu_camera"
         android:text="@string/capture_photo" />
 
@@ -102,8 +103,10 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="31dp"
         android:layout_toEndOf="@+id/ifoundtextView"
-        android:onClick="buttonClicked"
+        android:onClick="ifoundbuttonClicked"
         android:text="@string/report_found" />
+
+
 
 
 

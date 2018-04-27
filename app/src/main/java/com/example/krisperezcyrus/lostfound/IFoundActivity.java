@@ -6,13 +6,13 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ListView;
+
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
+
 
 public class IFoundActivity extends AppCompatActivity {
 
@@ -38,7 +38,7 @@ public class IFoundActivity extends AppCompatActivity {
 
     }
 
-    public void buttonClicked(View view) {
+    public void ifoundbuttonClicked(View view) {
 
 
         String child = editTextname.getText().toString().trim();
@@ -64,6 +64,11 @@ public class IFoundActivity extends AppCompatActivity {
         Toast.makeText(this,"Item Reported",Toast.LENGTH_LONG).show();
         startActivity(intent);
 
+
+
+    }
+
+    public void camerabuttonClicked(View view) {
 
 
     }

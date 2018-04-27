@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeLostActivity"
-    android:orientation="vertical">
+    tools:context=".HomeLostActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -15,29 +14,21 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:layout_height="57sp"
+            android:background="@color/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_home_lost" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/lostItemsList"
+        android:layout_width="match_parent"
+        android:layout_height="510dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
 
 
+    </android.support.v7.widget.RecyclerView>
 
-
-        <ListView
-            android:id="@+id/lostListView"
-            android:layout_width="match_parent"
-            android:layout_height="517dp"
-            android:layout_marginVertical="55dp">
-
-
-        </ListView>
-
-
-
-
-
-</LinearLayout>
+</RelativeLayout>
