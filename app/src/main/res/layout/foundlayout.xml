@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_margin="20dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cardviewfoundlayout">
+
+    <LinearLayout
+
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+
+        <ImageView
+            android:id="@+id/foundimagespreview"
+            android:layout_height="200dp"
+            android:layout_width="match_parent"
+            android:src="@drawable/comingsoon"
+            android:contentDescription="@string/todo" />
+
+        <TextView
+            android:id="@+id/namepost"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="@string/your_name" />
+
+        <TextView
+            android:id="@+id/emailpost"
+            android:layout_width="match_parent"
+            android:layout_height="23dp"
+            android:text="@string/your_email" />
+
+        <TextView
+            android:id="@+id/phonepost"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:text="@string/your_phone_number" />
+
+        <TextView
+            android:id="@+id/descriptionpost"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:text="@string/description" />
+
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

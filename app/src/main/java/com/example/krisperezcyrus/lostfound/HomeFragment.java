@@ -7,12 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+
 import android.widget.Toast;
 
-import static android.widget.Toast.makeText;
-import static com.example.krisperezcyrus.lostfound.R.id.homelostbtn;
-import static com.example.krisperezcyrus.lostfound.R.id.startButton;
+
 
 
 /**
@@ -20,7 +18,7 @@ import static com.example.krisperezcyrus.lostfound.R.id.startButton;
  */
 public class HomeFragment extends Fragment implements View.OnClickListener{
 
-    Button homeLostButton;
+
 
 
     public HomeFragment() {
@@ -51,12 +49,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onClick(View view) {
 
-                Intent i = new Intent(getActivity(),HomeLostActivity.class);
+                Intent i = new Intent(getActivity(), HomeLostActivity.class);
                 startActivity(i);
                 Toast.makeText(getActivity(), "Lost Items", Toast.LENGTH_LONG).show();
             }
         });
-
 
 
         view.findViewById(R.id.homefoundbtn).setOnClickListener(new View.OnClickListener() {
@@ -70,23 +67,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         });
 
 
-
-
-
-
-
-
-
-        //public void onClick(View view) {
-       // switch (view.getId()) {
-            //case homelostbtn:
-
-               // Intent intent = new Intent(getActivity(), HomeLostActivity.class);
-               // startActivity(intent);
-              //  Toast.makeText(getActivity(), "Lost Items", Toast.LENGTH_LONG).show();
-               // break;
-
-        //}
     }
 
     @Override

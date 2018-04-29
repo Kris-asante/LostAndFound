@@ -8,6 +8,8 @@
     tools:context=".IFoundActivity">
 
 
+
+
     <EditText
         android:id="@+id/name"
         android:layout_width="288dp"
@@ -72,7 +74,7 @@
         android:singleLine="false"
         android:textSize="14sp" />
 
-    <Button
+   <!-- <Button
         android:id="@+id/camerabutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -80,9 +82,12 @@
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="120dp"
         android:layout_marginEnd="12dp"
-        android:onClick="camerabuttonClicked"
         android:drawableStart="@drawable/ic_menu_camera"
-        android:text="@string/capture_photo" />
+        android:text="@string/capture_photo"
+        android:onClick="camerabtnclicked"/>
+
+
+
 
 
     <ImageView
@@ -94,7 +99,7 @@
         android:layout_marginBottom="61dp"
         android:layout_marginEnd="-109dp"
         android:layout_toStartOf="@+id/ifoundtextView"
-        android:contentDescription="@string/todo" />
+        android:contentDescription="@string/todo" />-->
 
     <Button
         android:id="@+id/ifoundreportbtn"
@@ -103,9 +108,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="31dp"
         android:layout_toEndOf="@+id/ifoundtextView"
-        android:onClick="ifoundbuttonClicked"
-        android:text="@string/report_found" />
-
+        android:text="@string/report_found"
+        android:onClick="ifoundbuttonClicked"/>
 
 
 

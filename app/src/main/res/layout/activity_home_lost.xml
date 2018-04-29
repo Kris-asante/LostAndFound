@@ -21,6 +21,9 @@
 
     </android.support.design.widget.AppBarLayout>
 
+
+    <include layout="@layout/content_home_lost" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/lostItemsList"
         android:layout_width="match_parent"

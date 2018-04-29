@@ -86,7 +86,7 @@ private FirebaseAuth mAuth;
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.logout_account)
+        if (id == R.id.about_us)
 
 
         //will change this to about us
@@ -127,6 +127,15 @@ private FirebaseAuth mAuth;
 
 
         }
+
+        else if (id == R.id.nav_logout) {
+
+            mAuth.signOut();
+
+            startActivity(new Intent(Ankasa.this,ToastActivity.class));
+
+        }
+
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
