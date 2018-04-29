@@ -15,25 +15,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ToastActivity" />
+        <activity android:name=".ToastActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Ankasa"
             android:label="@string/title_activity_ankasa"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ILostActivity" />
-
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value=".Ankasa" />
-
-        <activity android:name=".IFoundActivity">
+        <activity android:name=".ILostActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Ankasa" />
+        </activity>
+        <activity android:name=".IFoundActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Ankasa" />
@@ -41,20 +44,29 @@
         <activity
             android:name=".HomeLostActivity"
             android:label="@string/title_activity_home_lost"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeLostActivity" />
+                android:value=".Ankasa" />
         </activity>
         <activity
             android:name=".HomeFoundActivity"
             android:label="@string/title_activity_home_found"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeFoundActivity" />
+                android:value=".Ankasa" />
         </activity>
-        <activity android:name=".Camera2Activity"></activity>
+        <activity android:name=".Camera2Activity" />
+        <activity android:name=".AboutUsActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Ankasa" />
+
+        </activity>
     </application>
 
 </manifest>

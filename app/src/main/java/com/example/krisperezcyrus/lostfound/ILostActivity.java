@@ -163,16 +163,31 @@ public class ILostActivity extends AppCompatActivity  {
                     newPost.child("description").setValue(yourdescription);
                     newPost.child("image").setValue(downloadurl.toString());
 
+
+
+
+
+
                 }
             });
+
+            Intent intent = new Intent(ILostActivity.this,HomeLostActivity.class);
+            Toast.makeText(this,"Item Reported",Toast.LENGTH_LONG).show();
+            startActivity(intent);
+
+
+        } else {
+
+            Toast.makeText(this,"Field cannot be left empty",Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(ILostActivity.this,ILostActivity.class);
+            startActivity(intent);
         }
 
 
 
 
-        Intent intent = new Intent(ILostActivity.this,HomeLostActivity.class);
-        Toast.makeText(this,"Item Reported",Toast.LENGTH_LONG).show();
-        startActivity(intent);
+
+
 
     }
 

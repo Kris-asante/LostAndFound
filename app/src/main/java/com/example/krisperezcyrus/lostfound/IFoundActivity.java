@@ -95,12 +95,15 @@ public class IFoundActivity extends AppCompatActivity {
            // });
         }
 
-
-
-
         Intent intent = new Intent(IFoundActivity.this,HomeFoundActivity.class);
         Toast.makeText(this,"Item Reported",Toast.LENGTH_LONG).show();
         startActivity(intent);
+
+
+
+
+
+
 
 
 

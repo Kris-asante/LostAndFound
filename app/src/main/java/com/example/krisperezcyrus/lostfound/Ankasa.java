@@ -91,8 +91,8 @@ private FirebaseAuth mAuth;
 
         //will change this to about us
             {
-                mAuth.signOut();
-                startActivity(new Intent(Ankasa.this,ToastActivity.class));
+                startActivity(new Intent(Ankasa.this,AboutUsActivity.class));
+
             return false;
         }
 
@@ -124,7 +124,9 @@ private FirebaseAuth mAuth;
             ft.commit();
 
         } else if (id == R.id.nav_studentID) {
-
+            android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.flMain,new StudentFragment());
+            ft.commit();
 
         }
 
@@ -138,7 +140,7 @@ private FirebaseAuth mAuth;
 
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

@@ -43,8 +43,8 @@
     <string name="whereyouthinkyoulostit">Where You Lost It</string>
 
     <string name="title_activity_basic">Basic</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title"><!--Android Studio-->Welcome To</string>
+    <string name="nav_header_subtitle"><!--android.studio@android.com-->Lost&amp;Found</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="lost_items">Lost Items</string>
@@ -54,6 +54,36 @@
     <string name="todo">TODO</string>
     <string name="title_activity_home_lost">Lost Items</string>
     <string name="title_activity_home_found">Found Items</string>
+    <string name="_2018_KrisyMay_project_all_rights_reserved">2018 KrisyMay-PROJECT.All rights reserved</string>
+    <string name="aboutApp">
 
+
+Globally there are 610 million people searching for something or someone lost. 73% of lost items never return. 20% of lost items is actually stolen. 25% of lost cats and 7% of lost dogs never return to their owner.
+
+If you ever lost something (who hasn’t?) you know how frustrating it can be.. Where did I loose it? Did anyone find it? How can I find him/her? What would I do if I found something? Even with all the quick share possibilities via social media it’s still frustrating. So wouldn’t it be awesome if there was one place where you know people would go to report lost and found? We are creating that place!
+
+How frustrating it is when you lose something, especially when it has emotional value to you. Like that jewelry you got from your late grandmother. Or when your beloved pet goes missing? It’s invaluable. However, it’s 100% certain that whenever you lose something somebody will find it. It simply cannot dissolve.
+
+The person that finds it need to report it and you need to initiate a search. Where to begin? A lot of hassle these days. Not anymore. Lost&amp;Found is a simple way to connect somebody who lost something with the person that found it.
+
+It’s free and easy to use. So even though you haven’t lost anything yet, help others around you by downloading the app and be an active finder. Hey, you might even get a fun reward for it.
+
+We have a vision on becoming the largest Lost &amp; Found application by helping each other. So please feel free to download the app and let us know what you think. We would appreciate it if you would share Lost&amp;Found with your friends and spread the word.
+
+
+    </string>
+    <string name="venuefragment">
+        Will be updated on next release as a project work
+        This fragment show an exact location of lost and found items on a map
+    </string>
+    <string name="accountfragment">
+         Will be updated on next release as a project work
+        This fragment show the items reported and items can be deleted by the user
+    </string>
+    <string name="studentfragment">
+         Will be updated on next release as a project work
+        This fragment allow report solely for Student\'s Identity cards
+        Where you can switch as reporting either found or lost
+    </string>
 </resources>
 

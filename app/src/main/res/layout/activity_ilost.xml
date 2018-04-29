@@ -90,7 +90,8 @@
         android:layout_marginBottom="14dp"
         android:layout_marginEnd="-109dp"
         android:layout_toStartOf="@+id/ilosttextView"
-        android:contentDescription="@string/todo" />
+        android:contentDescription="@string/todo"
+        android:src="@drawable/noimage"/>
 
     <Button
         android:id="@+id/ilostreportbtn"

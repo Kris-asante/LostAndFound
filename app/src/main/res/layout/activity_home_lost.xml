@@ -22,7 +22,9 @@
     </android.support.design.widget.AppBarLayout>
 
 
-    <include layout="@layout/content_home_lost" />
+    <include
+        layout="@layout/content_home_lost"
+        android:layout_height="119dp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/lostItemsList"
