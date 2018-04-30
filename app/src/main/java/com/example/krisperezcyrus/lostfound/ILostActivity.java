@@ -147,34 +147,46 @@ public class ILostActivity extends AppCompatActivity  {
 
 
 
-        if (!TextUtils.isEmpty(yourname) && !TextUtils.isEmpty(youremail) && !TextUtils.isEmpty(yourphone) && !TextUtils.isEmpty(yourdescription)){
+        if (!TextUtils.isEmpty(yourname) && !TextUtils.isEmpty(youremail) && !TextUtils.isEmpty(yourphone) && !TextUtils.isEmpty(yourdescription )){
 
-            // this is for upload of image to the cloud
-            StorageReference filepath = storageReference.child("ImageUpload").child(uri.getLastPathSegment());
-            filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    final Uri downloadurl = taskSnapshot.getDownloadUrl();
-                    Toast.makeText(ILostActivity.this,"Image Upload Successful",Toast.LENGTH_LONG).show();
-                    DatabaseReference newPost = databaseReference.push();
-                    newPost.child("name").setValue(yourname);
-                    newPost.child("email").setValue(youremail);
-                    newPost.child("phone").setValue(yourphone);
-                    newPost.child("description").setValue(yourdescription);
-                    newPost.child("image").setValue(downloadurl.toString());
-
-
-
-
+            if(uri != null) {
+                //Uri uri = Uri.parse("android.resource://com.example.krisperezcyrus.lostfound/drawable/noimage");
+                // this is for upload of image to the cloud
+                StorageReference filepath = storageReference.child("ImageUpload").child(uri.getLastPathSegment());
+                filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        final Uri downloadurl = taskSnapshot.getDownloadUrl();
+                        Toast.makeText(ILostActivity.this, "Image Upload Successful", Toast.LENGTH_LONG).show();
+                        DatabaseReference newPost = databaseReference.push();
+                        newPost.child("name").setValue(yourname);
+                        newPost.child("email").setValue(youremail);
+                        newPost.child("phone").setValue(yourphone);
+                        newPost.child("description").setValue(yourdescription);
+                        newPost.child("image").setValue(downloadurl.toString());
 
 
-                }
-            });
+                        //if(imageView.set)
 
-            Intent intent = new Intent(ILostActivity.this,HomeLostActivity.class);
-            Toast.makeText(this,"Item Reported",Toast.LENGTH_LONG).show();
-            startActivity(intent);
 
+                    }
+                });
+
+                Intent intent = new Intent(ILostActivity.this, HomeLostActivity.class);
+                Toast.makeText(this, "Item Reported", Toast.LENGTH_LONG).show();
+                startActivity(intent);
+            }else{
+                Toast.makeText(ILostActivity.this, "Image Upload Successful", Toast.LENGTH_LONG).show();
+                DatabaseReference newPost = databaseReference.push();
+                newPost.child("name").setValue(yourname);
+                newPost.child("email").setValue(youremail);
+                newPost.child("phone").setValue(yourphone);
+                newPost.child("description").setValue(yourdescription);
+
+                Intent intent = new Intent(ILostActivity.this, HomeLostActivity.class);
+                Toast.makeText(this, "Item Reported", Toast.LENGTH_LONG).show();
+                startActivity(intent);
+            }
 
         } else {
 
