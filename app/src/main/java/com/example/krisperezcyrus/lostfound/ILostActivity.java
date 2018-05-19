@@ -166,7 +166,7 @@ public class ILostActivity extends AppCompatActivity  {
                         newPost.child("image").setValue(downloadurl.toString());
 
 
-                        //if(imageView.set)
+                        
 
 
                     }

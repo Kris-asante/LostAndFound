@@ -5,9 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewAnimationUtils;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import static com.example.krisperezcyrus.lostfound.R.id.startButton;
@@ -69,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()){
             case startButton:
                 log.d("action","Get Started button pushed");
-                Intent intent = new Intent(MainActivity.this,ToastActivity.class);
+                Intent intent = new Intent(MainActivity.this,SignInActivity.class);
                 Toast.makeText(this,"Internet Connection Required",Toast.LENGTH_LONG).show();
                 startActivity(intent);
                 break;

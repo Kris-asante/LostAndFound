@@ -63,7 +63,7 @@ private FirebaseAuth mAuth;
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -134,7 +134,7 @@ private FirebaseAuth mAuth;
 
             mAuth.signOut();
 
-            startActivity(new Intent(Ankasa.this,ToastActivity.class));
+            startActivity(new Intent(Ankasa.this,SignInActivity.class));
 
         }
 
