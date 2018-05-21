@@ -63,7 +63,13 @@ public class IFoundActivity extends AppCompatActivity {
 
     }
 
+    private static boolean isValidEmail(String email) {
+        return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
 
+    private boolean isValidPhoneNumber(String phone) {
+        return android.util.Patterns.PHONE.matcher(phone).matches();
+    }
 
     public void ifoundbuttonClicked(View view) {
 
@@ -75,7 +81,7 @@ public class IFoundActivity extends AppCompatActivity {
 
 
 
-        if (!TextUtils.isEmpty(yourname) && !TextUtils.isEmpty(youremail) && !TextUtils.isEmpty(yourphone) && !TextUtils.isEmpty(yourdescription)){
+        if (isValidPhoneNumber(editTextphone.getText().toString()) && isValidEmail(editTextemail.getText().toString()) && !TextUtils.isEmpty(yourname) && !TextUtils.isEmpty(youremail) && !TextUtils.isEmpty(yourphone) && !TextUtils.isEmpty(yourdescription)){
 
             // this is for upload of image to the cloud
            // StorageReference filepath = storageReference.child("FoundImageUpload").child(uri.getLastPathSegment());
@@ -92,21 +98,22 @@ public class IFoundActivity extends AppCompatActivity {
                    // newPost.child("image").setValue(downloadurl.toString());
 
                // }
-           // });
+
+
+
+            // });
+
+            Intent intent = new Intent(IFoundActivity.this,HomeFoundActivity.class);
+            Toast.makeText(this,"Item Reported",Toast.LENGTH_LONG).show();
+            startActivity(intent);
         }
 
-        Intent intent = new Intent(IFoundActivity.this,HomeFoundActivity.class);
-        Toast.makeText(this,"Item Reported",Toast.LENGTH_LONG).show();
-        startActivity(intent);
 
+else {
 
-
-
-
-
-
-
-
+            Toast.makeText(getApplicationContext(),"Enter Valid Email-Id",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Enter valid Phone Number",Toast.LENGTH_LONG).show();}
+            Toast.makeText(this,"Field cannot be left empty",Toast.LENGTH_LONG).show();
 
     }
 

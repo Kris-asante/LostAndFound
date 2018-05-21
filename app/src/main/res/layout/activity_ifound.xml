@@ -42,7 +42,8 @@
         android:ems="10"
         android:hint="@string/your_phone_number"
         android:inputType="phone"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:maxLength="10"/>
 
 
     <TextView

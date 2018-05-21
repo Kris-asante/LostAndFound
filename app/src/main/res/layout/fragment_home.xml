@@ -27,6 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignTop="@+id/homefoundbtn"
+            android:background="@android:color/holo_blue_light"
             android:text="@string/lost_items"
             android:textAlignment="center"
             android:textColor="@color/likeWhite" />
@@ -40,6 +41,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="0dp"
             android:layout_marginTop="26dp"
+            android:background="@android:color/holo_blue_light"
             android:text="@string/found_items"
             android:textAlignment="center"
             android:textColor="@color/likeWhite" />

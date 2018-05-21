@@ -27,6 +27,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class ILostActivity extends AppCompatActivity  {
@@ -126,9 +128,16 @@ public class ILostActivity extends AppCompatActivity  {
     }
 
 
+    private static boolean isValidEmail(String email) {
+        return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    private boolean isValidPhoneNumber(String phone) {
+        return android.util.Patterns.PHONE.matcher(phone).matches();
+    }
+
+
     public void ilostbuttonClicked(View view){
-
-
 
 
         final String yourname = editTextname.getText().toString().trim();
@@ -147,7 +156,11 @@ public class ILostActivity extends AppCompatActivity  {
 
 
 
-        if (!TextUtils.isEmpty(yourname) && !TextUtils.isEmpty(youremail) && !TextUtils.isEmpty(yourphone) && !TextUtils.isEmpty(yourdescription )){
+        if (isValidPhoneNumber(editTextphone.getText().toString()) && isValidEmail(editTextemail.getText().toString()) && !TextUtils.isEmpty(yourname) && !TextUtils.isEmpty(youremail) && !TextUtils.isEmpty(yourphone) && !TextUtils.isEmpty(yourdescription )){
+
+
+
+
 
             if(uri != null) {
                 //Uri uri = Uri.parse("android.resource://com.example.krisperezcyrus.lostfound/drawable/noimage");
@@ -164,6 +177,7 @@ public class ILostActivity extends AppCompatActivity  {
                         newPost.child("phone").setValue(yourphone);
                         newPost.child("description").setValue(yourdescription);
                         newPost.child("image").setValue(downloadurl.toString());
+
 
 
                         
@@ -189,7 +203,8 @@ public class ILostActivity extends AppCompatActivity  {
             }
 
         } else {
-
+        Toast.makeText(getApplicationContext(),"Enter Valid Email-Id",Toast.LENGTH_LONG).show();
+          Toast.makeText(this,"Enter valid Phone Number",Toast.LENGTH_LONG).show();
             Toast.makeText(this,"Field cannot be left empty",Toast.LENGTH_LONG).show();
             Intent intent = new Intent(ILostActivity.this,ILostActivity.class);
             startActivity(intent);

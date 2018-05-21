@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".ILostActivity">
+    tools:context=".ILostActivity"
+    >
 
 
     <EditText
@@ -28,7 +29,8 @@
         android:layout_marginTop="120dp"
         android:hint="@string/your_email"
         android:inputType="textEmailAddress"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        />
 
     <EditText
         android:id="@+id/phone"
@@ -40,7 +42,8 @@
         android:ems="10"
         android:hint="@string/your_phone_number"
         android:inputType="phone"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:maxLength="10"/>
 
 
     <TextView
