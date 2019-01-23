@@ -8,4 +8,8 @@
     <color name="buttonTextColor">#ffe343</color>
     <color name="signinbgclr">#cc1a1b1a</color>
     <color name="signinmessageclr">#000000</color>
+    <color name="buttnclrs4home">#a4a1a1</color>
+    <color name="bckgrndclrhome">#ccc1c1</color>
+    <color name="contactcolor">#349e1d</color>
+
 </resources>

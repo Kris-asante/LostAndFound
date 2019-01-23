@@ -1,14 +1,18 @@
 package com.example.krisperezcyrus.lostfound;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -19,6 +23,8 @@ public class HomeLostActivity extends AppCompatActivity {
 
     private RecyclerView LostItemsList ;
     private DatabaseReference mDatabase;
+
+    public static final String TAG = HomeLostActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +114,45 @@ public class HomeLostActivity extends AppCompatActivity {
             Picasso.with(ctx).load(image).into(postimage);
         }
 
+    }
+
+    public void dial_Number(View view) {
+        TextView textView = findViewById(R.id.phonepost);
+        // Use format with "tel:" and phone number to create mPhoneNum.
+
+        String phone = String.format("tel: %s",textView.getText().toString());
+
+        // Create the intent.
+        Intent dialIntent = new Intent(Intent.ACTION_DIAL);
+        // Set the data for the intent as the phone number.
+        dialIntent.setData(Uri.parse(phone));
+        // If package resolves to an app, send intent.
+        if (dialIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(dialIntent);
+        } else {
+            Log.e(TAG, "Can't resolve app for ACTION_DIAL Intent.");
+            Toast.makeText(this,"Can't call number",Toast.LENGTH_LONG).show();
+        }
+
+
+    }
+
+    public void sms_SendMessage(View view) {
+        // Find the TextView number_to_call and assign it to textView.
+        TextView textView = (TextView) findViewById(R.id.phonepost);
+        // Concatenate "smsto:" with phone number to create smsNumber.
+        String smsNumber = "smsto:" + textView.getText().toString();
+        // Create the intent.
+        Intent smsIntent = new Intent(Intent.ACTION_SENDTO);
+        // Set the data for the intent as the phone number.
+        smsIntent.setData(Uri.parse(smsNumber));
+        // If package resolves (target app installed), send intent.
+        if (smsIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(smsIntent);
+        } else {
+            Log.e(TAG, "Can't resolve app for ACTION_SENDTO Intent.");
+            Toast.makeText(this,"Can't SMS message number",Toast.LENGTH_LONG).show();
+        }
     }
 
     }

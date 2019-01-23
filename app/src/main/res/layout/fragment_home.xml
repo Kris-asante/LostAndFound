@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment">
+    tools:context=".HomeFragment"
+    android:background="@color/bckgrndclrhome">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
@@ -27,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignTop="@+id/homefoundbtn"
-            android:background="@android:color/holo_blue_light"
+            android:background="@color/buttnclrs4home"
             android:text="@string/lost_items"
             android:textAlignment="center"
             android:textColor="@color/likeWhite" />
@@ -41,7 +42,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="0dp"
             android:layout_marginTop="26dp"
-            android:background="@android:color/holo_blue_light"
+            android:background="@color/buttnclrs4home"
             android:text="@string/found_items"
             android:textAlignment="center"
             android:textColor="@color/likeWhite" />
