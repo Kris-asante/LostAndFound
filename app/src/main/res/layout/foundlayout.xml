@@ -69,7 +69,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
                 android:src="@drawable/ic_email_black_24dp"
-                android:tint="@color/contactcolor"/>
+                android:tint="@color/contactcolor"
+                android:onClick="send_Email"/>
 
         </RelativeLayout>
 

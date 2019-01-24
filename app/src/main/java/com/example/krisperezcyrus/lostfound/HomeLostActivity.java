@@ -30,7 +30,7 @@ public class HomeLostActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_lost);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
 
@@ -85,26 +85,26 @@ public class HomeLostActivity extends AppCompatActivity {
 
         public void setName(String name){
 
-            TextView postName = (TextView)itemView.findViewById(R.id.namepost);
+            TextView postName = itemView.findViewById(R.id.namepost);
             postName.setText(name);
         }
 
 
         public void setEmail(String email) {
 
-            TextView postemail = (TextView) itemView.findViewById(R.id.emailpost);
+            TextView postemail =  itemView.findViewById(R.id.emailpost);
             postemail.setText(email);
         }
 
         public void setPhone(String phone) {
 
-            TextView postphone = (TextView) itemView.findViewById(R.id.phonepost);
+            TextView postphone = itemView.findViewById(R.id.phonepost);
             postphone.setText(phone);
         }
 
         public void setDescription(String description) {
 
-            TextView postdescription = (TextView) itemView.findViewById(R.id.descriptionpost);
+            TextView postdescription =  itemView.findViewById(R.id.descriptionpost);
             postdescription.setText(description);
         }
 
@@ -129,6 +129,7 @@ public class HomeLostActivity extends AppCompatActivity {
         // If package resolves to an app, send intent.
         if (dialIntent.resolveActivity(getPackageManager()) != null) {
             startActivity(dialIntent);
+            Toast.makeText(this,"Opening Dialer",Toast.LENGTH_SHORT).show();
         } else {
             Log.e(TAG, "Can't resolve app for ACTION_DIAL Intent.");
             Toast.makeText(this,"Can't call number",Toast.LENGTH_LONG).show();
@@ -144,15 +145,32 @@ public class HomeLostActivity extends AppCompatActivity {
         String smsNumber = "smsto:" + textView.getText().toString();
         // Create the intent.
         Intent smsIntent = new Intent(Intent.ACTION_SENDTO);
+        // Add the message (sms) with the key ("sms_body").
+        smsIntent.putExtra("sms_body", "Hello There, your reported lost item on LOST&FOUND has been found." +
+                " Kindly contact me for identification and collection. " );
         // Set the data for the intent as the phone number.
         smsIntent.setData(Uri.parse(smsNumber));
         // If package resolves (target app installed), send intent.
         if (smsIntent.resolveActivity(getPackageManager()) != null) {
             startActivity(smsIntent);
+            Toast.makeText(this,"Opening SMS App",Toast.LENGTH_SHORT).show();
         } else {
             Log.e(TAG, "Can't resolve app for ACTION_SENDTO Intent.");
             Toast.makeText(this,"Can't SMS message number",Toast.LENGTH_LONG).show();
         }
+    }
+    public void sendEmail (View view){
+        TextView emailToEmail = findViewById(R.id.emailpost);
+        String recipientList = emailToEmail.getText().toString();
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setData(Uri.parse("mailto:"));
+        String[] recipients = recipientList.split(",");
+        intent.putExtra(Intent.EXTRA_EMAIL, recipients);
+        intent.putExtra(Intent.EXTRA_SUBJECT, "I Have Found Your Lost Item on LOST&FOUND App");
+        intent.putExtra(Intent.EXTRA_TEXT, "Hello There, your reported lost item on LOST&FOUND has been found.\n" +"Kindly contact me for identification and collection.\n" +"My Contact :");
+        intent.setType("message/rfc822");
+        Intent mailer = Intent.createChooser(intent, "Send Email");
+            startActivity(mailer);
     }
 
     }

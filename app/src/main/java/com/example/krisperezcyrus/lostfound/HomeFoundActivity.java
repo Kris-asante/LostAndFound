@@ -1,6 +1,7 @@
 package com.example.krisperezcyrus.lostfound;
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -96,14 +97,14 @@ public class HomeFoundActivity extends AppCompatActivity {
 
         public void setName(String name) {
 
-            TextView postName = (TextView) itemView.findViewById(R.id.namepost);
+            TextView postName =  itemView.findViewById(R.id.namepost);
             postName.setText(name);
         }
 
 
         public void setEmail(String email) {
 
-            TextView postemail = (TextView) itemView.findViewById(R.id.emailpost);
+            TextView postemail =  itemView.findViewById(R.id.emailpost);
             postemail.setText(email);
         }
 
@@ -151,6 +152,8 @@ public class HomeFoundActivity extends AppCompatActivity {
         String smsNumber = "smsto:" + textView.getText().toString();
        // Create the intent.
         Intent smsIntent = new Intent(Intent.ACTION_SENDTO);
+        // Add the message (sms) with the key ("sms_body").
+        smsIntent.putExtra("sms_body", "Hello There, you reported a found item on LOST&FOUND App which I did misplace.\n" +"Let's kindly meet to prove my ownership. " );
         // Set the data for the intent as the phone number.
         smsIntent.setData(Uri.parse(smsNumber));
         // If package resolves (target app installed), send intent.
@@ -160,6 +163,25 @@ public class HomeFoundActivity extends AppCompatActivity {
             Log.e(TAG, "Can't resolve app for ACTION_SENDTO Intent.");
             Toast.makeText(this,"Can't SMS message number",Toast.LENGTH_LONG).show();
         }
+
+
+}
+
+    public void send_Email (View view){
+        TextView emailToEmail = findViewById(R.id.emailpost);
+        String recipientList = emailToEmail.getText().toString();
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setData(Uri.parse("mailto:"));
+        String[] recipients = recipientList.split(",");
+        intent.putExtra(Intent.EXTRA_EMAIL, recipients);
+        intent.putExtra(Intent.EXTRA_TEXT, "Hello There, you reported a found item on LOST&FOUND App which I did misplace.\n" +"Let's kindly meet to prove my ownership.\n" +"My Contact :");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "You Have Found My Lost Item on LOST&FOUND App");
+        intent.setType("message/rfc822");
+        Intent mailer = Intent.createChooser(intent, "Send Email");
+        startActivity(mailer);
     }
+
+
+
 }
 
