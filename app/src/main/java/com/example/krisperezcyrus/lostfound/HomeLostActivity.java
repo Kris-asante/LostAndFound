@@ -152,9 +152,10 @@ public class HomeLostActivity extends AppCompatActivity {
         smsIntent.setData(Uri.parse(smsNumber));
         // If package resolves (target app installed), send intent.
         if (smsIntent.resolveActivity(getPackageManager()) != null) {
-            startActivity(smsIntent);
             Toast.makeText(this,"Opening SMS App",Toast.LENGTH_SHORT).show();
-        } else {
+            startActivity(smsIntent);
+            }
+            else {
             Log.e(TAG, "Can't resolve app for ACTION_SENDTO Intent.");
             Toast.makeText(this,"Can't SMS message number",Toast.LENGTH_LONG).show();
         }
