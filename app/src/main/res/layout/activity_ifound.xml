@@ -76,7 +76,7 @@
         android:singleLine="false"
         android:textSize="14sp" />
 
-   <!-- <Button
+   <Button
         android:id="@+id/camerabutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -89,19 +89,17 @@
         android:onClick="camerabtnclicked"/>
 
 
-
-
-
     <ImageView
         android:id="@+id/Cameraimageview"
-        android:layout_width="141dp"
-        android:layout_height="132dp"
+        android:layout_width="229dp"
+        android:layout_height="152dp"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="61dp"
-        android:layout_marginEnd="-109dp"
-        android:layout_toStartOf="@+id/ifoundtextView"
-        android:contentDescription="@string/todo" />-->
+        android:layout_marginBottom="24dp"
+        android:scaleType="centerCrop"
+        android:layout_marginStart="12dp"
+        android:contentDescription="@string/todo" />
 
     <Button
         android:id="@+id/ifoundreportbtn"

@@ -1,12 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment"
+    tools:context=".BottomHomeFragment"
     android:background="@drawable/hmebckgrnd" >
-
-
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
@@ -25,7 +23,7 @@
         android:fitsSystemWindows="false">
 
         <Button
-            android:id="@+id/homelostbtn"
+            android:id="@+id/homelostbtns"
             style="@android:style/Widget.DeviceDefault.Button"
             android:layout_width="187dp"
             android:layout_height="wrap_content"
@@ -37,7 +35,7 @@
             android:textColor="@color/likeWhite" />
 
         <Button
-            android:id="@+id/homefoundbtn"
+            android:id="@+id/homefoundbtns"
             style="@android:style/Widget.DeviceDefault.Button"
             android:layout_width="197dp"
             android:layout_height="wrap_content"

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ReportItemFragment"
-    android:background="@drawable/reportbgpic2"
+    android:background="@drawable/hmebckgrnd"
     android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
@@ -15,26 +15,31 @@
         <Button
             android:id="@+id/lostItem"
             style="@android:style/Widget.DeviceDefault.Light.Button"
-            android:layout_width="wrap_content"
+            android:layout_width="234dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="88dp"
             android:background="@color/colorPrimary"
             android:text="@string/i_lost"
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/foundItem"
             style="@android:style/Widget.DeviceDefault.Light.Button"
-            android:layout_width="wrap_content"
+            android:layout_width="251dp"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/lostItem"
             android:layout_below="@+id/lostItem"
+            android:layout_marginStart="-11dp"
             android:layout_marginTop="141dp"
             android:background="@color/colorPrimary"
             android:text="@string/i_found"
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
 
     </RelativeLayout>

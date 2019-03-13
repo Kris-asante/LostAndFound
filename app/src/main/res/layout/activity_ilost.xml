@@ -107,6 +107,15 @@
         android:onClick="ilostbuttonClicked"
         android:text="@string/report_lost" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/noteTitle"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/noteBody"/>
+
 
 
 </RelativeLayout>

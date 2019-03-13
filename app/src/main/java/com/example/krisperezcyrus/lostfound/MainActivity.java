@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+
+
 import static com.example.krisperezcyrus.lostfound.R.id.startButton;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -27,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         Log.d("action","In onCreate");
+
+
 
     }
 

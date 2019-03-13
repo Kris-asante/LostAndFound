@@ -6,28 +6,29 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home_black_24dp"
-            android:title="Home" />
+            android:title="@string/home" />
+
         <item
-            android:id="@+id/nav_reportitem"
-            android:icon="@drawable/ic_report_black_24dp"
-            android:title="Report Item" />
+            android:id="@+id/nav_tellafriend"
+            android:icon="@drawable/ic_settings_phone_black_24dp"
+            android:title="@string/tell_a_friend" />
         <item
-            android:id="@+id/nav_myaccount"
-            android:icon="@drawable/ic_account_circle_black_24dp"
-            android:title="My Account" />
+            android:id="@+id/nav_security"
+            android:icon="@drawable/ic_security_black_24dp"
+            android:title="@string/data_security" />
         <item
-            android:id="@+id/nav_myvenue"
-            android:icon="@drawable/ic_my_location_black_24dp"
-            android:title="My Venue" />
+            android:id="@+id/nav_faq"
+            android:icon="@drawable/ic_info_black_24dp"
+            android:title="@string/faq" />
 
     </group>
 
-    <item android:title="Identity Cards">
+    <item android:title="@string/identity_cards">
         <menu>
             <item
                 android:id="@+id/nav_studentID"
                 android:icon="@drawable/ic_credit_card_black_24dp"
-                android:title="Student's ID" />
+                android:title="@string/student_s_id" />
 
         </menu>
     </item>
@@ -35,6 +36,7 @@
 
     <item android:title="">
         <menu>
+
             <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/ic_logout_black_24dp"

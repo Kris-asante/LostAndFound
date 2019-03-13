@@ -85,5 +85,32 @@ We have a vision on becoming the largest Lost &amp; Found application by helping
         This fragment allow report solely for Student\'s Identity cards
         Where you can switch as reporting either found or lost
     </string>
+
+    <string name="noteTitle"> (LOST&amp;FOUND)Lost Item Reported</string>
+    <string name="noteBody"> Open App to view reported item </string>
+    <string name="title_activity_bottom_navigation">BottomNavigation</string>
+    <string name="title_home">Home</string>
+
+    <string name="help">Help</string>
+    <string name="home">Home</string>
+    <string name="identity_cards">Identity Cards</string>
+    <string name="student_s_id">Student\'s ID</string>
+    <string name="faq">FAQ</string>
+    <string name="data_security">Data Security</string>
+    <string name="tell_a_friend">Tell A Friend</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_myaccount">My Account</string>
+    <string name="title_ReportItem">Report Item</string>
+    <string name="title_search">Search</string>
+    <string name="title_more">More</string>
+
+
+    <string name="my_account">My Account</string>
+    <string name="report_item">Report Item</string>
+    <string name="search">Search</string>
+    <string name="more">More</string>
+
+
 </resources>
 

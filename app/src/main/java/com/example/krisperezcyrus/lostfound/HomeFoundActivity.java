@@ -136,6 +136,7 @@ public class HomeFoundActivity extends AppCompatActivity {
         // If package resolves to an app, send intent.
         if (dialIntent.resolveActivity(getPackageManager()) != null) {
             startActivity(dialIntent);
+            Toast.makeText(this,"Opening Dialer",Toast.LENGTH_SHORT).show();
         } else {
             Log.e(TAG, "Can't resolve app for ACTION_DIAL Intent.");
             Toast.makeText(this,"Can't Make Call",Toast.LENGTH_LONG).show();
@@ -159,6 +160,7 @@ public class HomeFoundActivity extends AppCompatActivity {
         // If package resolves (target app installed), send intent.
         if (smsIntent.resolveActivity(getPackageManager()) != null) {
             startActivity(smsIntent);
+            Toast.makeText(this,"Opening Messaging App",Toast.LENGTH_SHORT).show();
         } else {
             Log.e(TAG, "Can't resolve app for ACTION_SENDTO Intent.");
             Toast.makeText(this,"Can't SMS message number",Toast.LENGTH_LONG).show();
@@ -179,6 +181,7 @@ public class HomeFoundActivity extends AppCompatActivity {
         intent.setType("message/rfc822");
         Intent mailer = Intent.createChooser(intent, "Send Email");
         startActivity(mailer);
+        Toast.makeText(this," Select Email Client",Toast.LENGTH_SHORT).show();
     }
 
 

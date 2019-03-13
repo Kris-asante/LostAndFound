@@ -117,6 +117,11 @@ else {
 
     }
 
+    public void camerabtnclicked(View view) {
+
+
+    }
+
     //the method to get the picture and upload
     // that's cameraUpload and onActivityResult on Ilostactivity
 

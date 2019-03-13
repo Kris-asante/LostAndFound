@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -15,6 +16,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.krisperezcyrus.lostfound.Model.MyResponse;
+import com.example.krisperezcyrus.lostfound.Model.Notification;
+import com.example.krisperezcyrus.lostfound.Model.Sender;
+import com.example.krisperezcyrus.lostfound.Remote.APIService;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -22,6 +27,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -30,8 +37,19 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class ILostActivity extends AppCompatActivity  {
+
+
+
+    //to display the notification
+    TextView noteTitle,noteBody;
+
+    APIService mService;
 
 
     private EditText editTextname,editTextemail,editTextphone,editTextdescription;
@@ -125,7 +143,26 @@ public class ILostActivity extends AppCompatActivity  {
 
            // }
       //  });
+
+
+      //  Common.currentToken = FirebaseInstanceId.getInstance().getToken();
+
+        //for multi users - notification
+      //  FirebaseMessaging.getInstance().subscribeToTopic("AAAAxxVisgo:APA91bFT5PZDucRSNtJoHwHTR9pwkvakCKJnB0Wp6kwFuBxwYBbVC_pjzrXzsqJ2mKqVdr0ZSrUAAysOln43MCSOeqf06oD172BsVoqQ6oMKHwycgeeJH-YjIoMYMKTk9hZekgXwxskf");
+
+
+
+        // this is for the notification under lost items for single user
+
+             //  mService = Common.getFCMClient();
+
+      /* noteTitle = findViewById(R.id.noteTitle);
+       noteTitle.setText("(LOST&amp;FOUND)Lost Item Reported");
+       noteBody = findViewById(R.id.noteBody);
+       noteBody.setText("Open App to view reported item");*/
+
     }
+
 
 
     private static boolean isValidEmail(String email) {
@@ -186,10 +223,40 @@ public class ILostActivity extends AppCompatActivity  {
                     }
                 });
 
+
+
+
                 Intent intent = new Intent(ILostActivity.this, HomeLostActivity.class);
                 Toast.makeText(this, "Item Reported", Toast.LENGTH_LONG).show();
                 startActivity(intent);
             }else{
+
+                /*send notification to topic
+                Notification notification = new Notification(noteTitle.getText().toString(),noteBody.getText().toString());
+              Sender sender = new Sender("/topics/MyTopic",notification); //send to itself
+
+                //for notification //send request witj token
+//                Notification notification = new Notification(noteTitle.getText().toString(),noteBody.getText().toString());
+//                Sender sender = new Sender(Common.currentToken,notification); //send to itself
+                mService.sendNotification(sender)
+                        .enqueue(new Callback<MyResponse>() {
+                            @Override
+                            public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                                if (response.body().success==1)
+                                    Toast.makeText(ILostActivity.this, "Users Notified", Toast.LENGTH_SHORT).show();
+                                else
+                                    Toast.makeText(ILostActivity.this,"Users Not Notified",Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onFailure(Call<MyResponse> call, Throwable t) {
+                                //Log e ("ERROR",t.getMessage());
+
+                            }
+                        });*/
+
+
+
                 Toast.makeText(ILostActivity.this, "Image Upload Successful", Toast.LENGTH_LONG).show();
                 DatabaseReference newPost = databaseReference.push();
                 newPost.child("name").setValue(yourname);

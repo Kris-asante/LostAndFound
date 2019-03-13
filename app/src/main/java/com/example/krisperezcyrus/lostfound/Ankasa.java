@@ -2,10 +2,11 @@ package com.example.krisperezcyrus.lostfound;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,12 +14,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Ankasa extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class Ankasa extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 private FirebaseAuth mAuth;
+private FrameLayout mMainFrame;
+private FrameLayout frameLayout;
+
+//THE VARIABLES FOR THE BOTTOM NAVIGATION
+private BottomAccountFragment bottomAccountFragment;
+private BottomReportFragment bottomReportFragment;
+private BottomSearchFragment bottomSearchFragment;
+private BottomHomeFragment bottomHomeFragment;
+
+
+private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +39,55 @@ private FirebaseAuth mAuth;
         setContentView(R.layout.activity_ankasa);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+//FRAMELAYOUT FOR THE THE FRAME VIEWS
+         frameLayout= (FrameLayout) findViewById(R.id.nav_frame);
+//BOTTOM NAV SWITCH STATEMETNS
+
+        mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener()
+        {
+
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.navigation_home:
+                        //mTextMessage.setText("Home");
+                        setFragment(bottomHomeFragment);
+                        return true;
+                    case R.id.navigation_myaccount:
+                        //mTextMessage.setText("My Account");
+                        setFragment(bottomAccountFragment);
+                        return true;
+                    case R.id.navigation_ReportItem:
+                        //mTextMessage.setText("Report Item");
+                        setFragment(bottomReportFragment);
+                        return true;
+                    case R.id.navigation_search:
+                        //mTextMessage.setText("Search");
+                        setFragment(bottomSearchFragment);
+                        return true;
+                    case R.id.navigation_more:
+                        //mTextMessage.setText("More");
+                        return true;
+                }
+                return false;
+            }
+        };
+
+
+
+
+
+
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+
+        bottomHomeFragment = new BottomHomeFragment();
+        bottomReportFragment = new BottomReportFragment();
+        bottomAccountFragment = new BottomAccountFragment();
+        bottomReportFragment = new BottomReportFragment();
+        bottomSearchFragment = new BottomSearchFragment();
+
 
        /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +115,14 @@ private FirebaseAuth mAuth;
         navigationView.setCheckedItem(R.id.nav_home);
 
         mAuth = FirebaseAuth.getInstance();
+
+    }
+
+    private void setFragment(Fragment fragment) {
+
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.nav_frame,fragment);
+        fragmentTransaction.commit();
 
     }
 
@@ -108,22 +178,13 @@ private FirebaseAuth mAuth;
             android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.flMain,new HomeFragment());
             ft.commit();
-        } else if (id == R.id.nav_reportitem) {
+
+        }   else if (id == R.id.nav_tellafriend) {
             android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.flMain,new ReportItemFragment());
+            ft.replace(R.id.flMain,new TellFriendFragment());
             ft.commit();
 
-        } else if (id == R.id.nav_myaccount) {
-            android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.flMain,new MyAccountFragment());
-            ft.commit();
-
-        } else if (id == R.id.nav_myvenue) {
-            android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.flMain,new MyVenueFragment());
-            ft.commit();
-
-        } else if (id == R.id.nav_studentID) {
+        }   else if (id == R.id.nav_studentID) {
             android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.flMain,new StudentFragment());
             ft.commit();
@@ -133,8 +194,9 @@ private FirebaseAuth mAuth;
         else if (id == R.id.nav_logout) {
 
             mAuth.signOut();
-
-            startActivity(new Intent(Ankasa.this,SignInActivity.class));
+            Intent intent = new Intent(Ankasa.this,SignInActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
 
         }
 

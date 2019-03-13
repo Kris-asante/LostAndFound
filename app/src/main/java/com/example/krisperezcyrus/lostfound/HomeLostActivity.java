@@ -154,6 +154,7 @@ public class HomeLostActivity extends AppCompatActivity {
         if (smsIntent.resolveActivity(getPackageManager()) != null) {
             Toast.makeText(this,"Opening SMS App",Toast.LENGTH_SHORT).show();
             startActivity(smsIntent);
+            Toast.makeText(this,"Opening Messaging App",Toast.LENGTH_SHORT).show();
             }
             else {
             Log.e(TAG, "Can't resolve app for ACTION_SENDTO Intent.");
@@ -172,6 +173,7 @@ public class HomeLostActivity extends AppCompatActivity {
         intent.setType("message/rfc822");
         Intent mailer = Intent.createChooser(intent, "Send Email");
             startActivity(mailer);
+            Toast.makeText(this," Select Email Client",Toast.LENGTH_SHORT).show();
     }
 
     }
