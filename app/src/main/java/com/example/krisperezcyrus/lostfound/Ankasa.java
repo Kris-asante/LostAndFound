@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
@@ -14,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -21,14 +23,14 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Ankasa extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 private FirebaseAuth mAuth;
-private FrameLayout mMainFrame;
-private FrameLayout frameLayout;
+
+public FrameLayout frameLayout;
 
 //THE VARIABLES FOR THE BOTTOM NAVIGATION
-private BottomAccountFragment bottomAccountFragment;
-private BottomReportFragment bottomReportFragment;
-private BottomSearchFragment bottomSearchFragment;
-private BottomHomeFragment bottomHomeFragment;
+public BottomAccountFragment bottomAccountFragment;
+public BottomReportFragment bottomReportFragment;
+public BottomSearchFragment bottomSearchFragment;
+public BottomHomeFragment bottomHomeFragment;
 
 
 private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener;
@@ -39,62 +41,65 @@ private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemS
         setContentView(R.layout.activity_ankasa);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
 //FRAMELAYOUT FOR THE THE FRAME VIEWS
-         frameLayout= (FrameLayout) findViewById(R.id.nav_frame);
-//BOTTOM NAV SWITCH STATEMETNS
+       // frameLayout= (FrameLayout) findViewById(R.id.nav_frame);
 
-        mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener()
-        {
+//
+////BOTTOM NAV SWITCH STATEMETNS
 
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.navigation_home:
-                        //mTextMessage.setText("Home");
-                        setFragment(bottomHomeFragment);
-                        return true;
-                    case R.id.navigation_myaccount:
-                        //mTextMessage.setText("My Account");
-                        setFragment(bottomAccountFragment);
-                        return true;
-                    case R.id.navigation_ReportItem:
-                        //mTextMessage.setText("Report Item");
-                        setFragment(bottomReportFragment);
-                        return true;
-                    case R.id.navigation_search:
-                        //mTextMessage.setText("Search");
-                        setFragment(bottomSearchFragment);
-                        return true;
-                    case R.id.navigation_more:
-                        //mTextMessage.setText("More");
-                        return true;
-                }
-                return false;
-            }
-        };
-
-
-
-
+//        mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener()
+//        {
+//
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                switch (item.getItemId()) {
+//                    case R.id.navigation_home:
+//                        //mTextMessage.setText("Home");
+//                        setFragment(bottomHomeFragment);
+//                        return true;
+//                    case R.id.navigation_myaccount:
+//                        //mTextMessage.setText("My Account");
+//                        setFragment(bottomAccountFragment);
+//                        return true;
+//                    case R.id.navigation_ReportItem:
+//                        //mTextMessage.setText("Report Item");
+//                        setFragment(bottomReportFragment);
+//                        return true;
+//                    case R.id.navigation_search:
+//                        //mTextMessage.setText("Search");
+//                        setFragment(bottomSearchFragment);
+//                        return true;
+//                    case R.id.navigation_more:
+//                        //mTextMessage.setText("More");
+//                        return true;
+//                }
+//                return false;
+//            }
+//        };
 
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
-        bottomHomeFragment = new BottomHomeFragment();
-        bottomReportFragment = new BottomReportFragment();
-        bottomAccountFragment = new BottomAccountFragment();
-        bottomReportFragment = new BottomReportFragment();
-        bottomSearchFragment = new BottomSearchFragment();
 
+//
+//        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+//        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+//
+//
+//        bottomHomeFragment = new BottomHomeFragment();
+//        bottomReportFragment = new BottomReportFragment();
+//        bottomAccountFragment = new BottomAccountFragment();
+//        bottomReportFragment = new BottomReportFragment();
+//        bottomSearchFragment = new BottomSearchFragment();
+//
 
-       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+      /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Will be updated soon", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
             }
         });*/
 
@@ -117,6 +122,37 @@ private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemS
         mAuth = FirebaseAuth.getInstance();
 
     }
+// on pc trial for bottom but error of the getSupport
+//    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+//            new BottomNavigationView.OnNavigationItemSelectedListener() {
+//                @Override
+//                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                    Fragment selectedFragment = null;
+//
+//
+//                    switch (item.getGroupId()){
+//
+//                        case R.id.navigation_home:
+//                            selectedFragment = new BottomHomeFragment();
+//                            break;
+//
+//                        case R.id.navigation_myaccount:
+//                            selectedFragment = new BottomAccountFragment();
+//                            break;
+//
+//                        case R.id.navigation_ReportItem:
+//                            selectedFragment = new BottomReportFragment();
+//                            break;
+//
+//                        case R.id.navigation_search:
+//                            selectedFragment = new BottomSearchFragment();
+//                            break;
+//                    }
+//
+//                    getSupportFragmentManager().beginTransaction().replace(R.id.nav_frame,selectedFragment).commit();
+//                    return false;
+//                }
+//            };
 
     private void setFragment(Fragment fragment) {
 
@@ -164,6 +200,9 @@ private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemS
                 startActivity(new Intent(Ankasa.this,AboutUsActivity.class));
 
             return false;
+        }else if (id == R.id.search){
+
+            startActivity(new Intent(Ankasa.this,SearchActivity.class));
         }
 
         return super.onOptionsItemSelected(item);
@@ -179,18 +218,23 @@ private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemS
             ft.replace(R.id.flMain,new HomeFragment());
             ft.commit();
 
-        }   else if (id == R.id.nav_tellafriend) {
+        }   else if (id == R.id.navigation_ReportItem) {
             android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.flMain,new TellFriendFragment());
+            ft.replace(R.id.flMain,new ReportItemFragment());
             ft.commit();
 
-        }   else if (id == R.id.nav_studentID) {
+
+        }   else if (id == R.id.navigation_myaccount) {
             android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.flMain,new StudentFragment());
+            ft.replace(R.id.flMain,new MyAccountFragment());
             ft.commit();
 
-        }
+        }   else if (id == R.id.nav_faq) {
+            android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.flMain,new FAQFragment());
+            ft.commit();
 
+        }  
         else if (id == R.id.nav_logout) {
 
             mAuth.signOut();

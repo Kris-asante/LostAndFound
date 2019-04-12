@@ -1,21 +1,27 @@
 package com.example.krisperezcyrus.lostfound;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 
 
-import static com.example.krisperezcyrus.lostfound.R.id.startButton;
+//import static com.example.krisperezcyrus.lostfound.R.id.startButton;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity /*implements View.OnClickListener*/
+
+{
+
 
     Button startbutton;
-
+    private static int SPLASH_TIME_OUT =3250;
     private android.util.Log log;
 
     @Override
@@ -23,9 +29,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        startbutton = findViewById(startButton);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intentsignin = new Intent(MainActivity.this,SignInActivity.class);
+                startActivity(intentsignin);
+                finish();
+            }
+        },SPLASH_TIME_OUT);
 
-        startbutton.setOnClickListener(this);
+
+
+        //startbutton = findViewById(startButton);
+
+        //startbutton.setOnClickListener(this);
 
 
         Log.d("action","In onCreate");
@@ -66,17 +83,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         log.d("action","In onDestroy");
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case startButton:
-                log.d("action","Get Started button pushed");
-                Intent intent = new Intent(MainActivity.this,SignInActivity.class);
-                Toast.makeText(this,"Internet Connection Required",Toast.LENGTH_LONG).show();
-                startActivity(intent);
-                break;
-
-        }
-    }
+//    @Override
+//    public void onClick(View view) {
+//        switch (view.getId()){
+//            case startButton:
+//                log.d("action","Get Started button pushed");
+//                Intent intent = new Intent(MainActivity.this,SignInActivity.class);
+//                Toast.makeText(this,"Internet Connection Required",Toast.LENGTH_LONG).show();
+//                startActivity(intent);
+//                break;
+//
+//        }
+//    }
 }
 

@@ -9,40 +9,37 @@
             android:title="@string/home" />
 
         <item
-            android:id="@+id/nav_tellafriend"
-            android:icon="@drawable/ic_settings_phone_black_24dp"
-            android:title="@string/tell_a_friend" />
+            android:id="@+id/navigation_ReportItem"
+            android:icon="@drawable/ic_report_black_24dp"
+            android:title="@string/report_item" />
+
         <item
-            android:id="@+id/nav_security"
-            android:icon="@drawable/ic_security_black_24dp"
-            android:title="@string/data_security" />
-        <item
-            android:id="@+id/nav_faq"
-            android:icon="@drawable/ic_info_black_24dp"
-            android:title="@string/faq" />
+            android:id="@+id/navigation_myaccount"
+            android:icon="@drawable/ic_account_circle_black_24dp"
+            android:title="@string/my_account" />
 
     </group>
 
-    <item android:title="@string/identity_cards">
-        <menu>
+
+<item android:title="">
+    <menu>
             <item
-                android:id="@+id/nav_studentID"
-                android:icon="@drawable/ic_credit_card_black_24dp"
-                android:title="@string/student_s_id" />
+                android:id="@+id/nav_security"
+                android:icon="@drawable/ic_security_black_24dp"
+                android:title="@string/data_security" />
+            <item
+                android:id="@+id/nav_faq"
+                android:icon="@drawable/ic_question_answer_black_24dp"
+                android:title="@string/faq" />
+
+            <item
+                        android:id="@+id/nav_logout"
+                        android:icon="@drawable/ic_logout_black_24dp"
+                        android:title="@string/logout_account" />
+
 
         </menu>
     </item>
 
-
-    <item android:title="">
-        <menu>
-
-            <item
-                android:id="@+id/nav_logout"
-                android:icon="@drawable/ic_logout_black_24dp"
-                android:title="@string/logout_account" />
-
-        </menu>
-    </item>
 
 </menu>

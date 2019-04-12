@@ -1,8 +1,8 @@
 package com.example.krisperezcyrus.lostfound;
 
 
+
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +12,10 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BottomAccountFragment extends Fragment {
+public class FAQFragment extends Fragment {
 
 
-    public BottomAccountFragment() {
+    public FAQFragment() {
         // Required empty public constructor
     }
 
@@ -23,8 +23,10 @@ public class BottomAccountFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        ((Ankasa)getActivity()).setActionBarTitle("FAQ");
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bottom_account, container, false);
+        return inflater.inflate(R.layout.fragment_faq, container, false);
     }
 
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LOST&amp;FOUND</string>
+    <string name="app_name">LOST&amp;\nFOUND</string>
     <string name="lost_an_item_or_found_a_missing_item">Lost an item or found a missing item…</string>
     <string name="best_platform_to_make_a_report">best platform to make a report</string>
     <string name="get_started">Get Started</string>
@@ -51,7 +51,7 @@
     <string name="found_items">Found Items</string>
     <string name="report_lost">Report Lost</string>
     <string name="report_found">Report Found</string>
-    <string name="todo">TODO</string>
+
     <string name="title_activity_home_lost">Lost Items</string>
     <string name="title_activity_home_found">Found Items</string>
     <string name="_2018_KrisyMay_project_all_rights_reserved">2018 KrisyMay-PROJECT.All rights reserved</string>
@@ -110,6 +110,10 @@ We have a vision on becoming the largest Lost &amp; Found application by helping
     <string name="report_item">Report Item</string>
     <string name="search">Search</string>
     <string name="more">More</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="todo">TODO</string>
+    <string name="account_fragment">ACCOUNT FRAGMENT</string>
+    <string name="textview">TextView</string>
 
 
 </resources>
