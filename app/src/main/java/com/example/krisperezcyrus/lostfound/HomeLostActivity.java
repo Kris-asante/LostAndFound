@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -41,10 +42,30 @@ public class HomeLostActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Lost");
 
 
+
+
+        //how the display of the reported items are arranged in the newest above/top
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+
+
+
+
     }
 
 
+    // for the search icon on the app bar
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.toolbar_menu_search,menu);
+
+
+        return true;
+    }
 
     @Override
     protected void onStart() {
@@ -65,6 +86,7 @@ public class HomeLostActivity extends AppCompatActivity {
                 viewHolder.setEmail(model.getEmail());
                 viewHolder.setPhone(model.getPhone());
                 viewHolder.setDescription(model.getDescription());
+                viewHolder.setTime(model.getTime());
                 viewHolder.setImage(getApplication(),model.getImage());
 
             }
@@ -108,6 +130,14 @@ public class HomeLostActivity extends AppCompatActivity {
             postdescription.setText(description);
         }
 
+
+        public void setTime(String time){
+
+            TextView postName = itemView.findViewById(R.id.time);
+            postName.setText(time);
+        }
+
+
         public void setImage (Context ctx,String image){
 
             ImageView postimage = itemView.findViewById(R.id.lostimagespreview);
@@ -129,7 +159,7 @@ public class HomeLostActivity extends AppCompatActivity {
         // If package resolves to an app, send intent.
         if (dialIntent.resolveActivity(getPackageManager()) != null) {
             startActivity(dialIntent);
-            Toast.makeText(this,"Opening Dialer",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Opening Dialer",Toast.LENGTH_LONG).show();
         } else {
             Log.e(TAG, "Can't resolve app for ACTION_DIAL Intent.");
             Toast.makeText(this,"Can't call number",Toast.LENGTH_LONG).show();
@@ -152,9 +182,9 @@ public class HomeLostActivity extends AppCompatActivity {
         smsIntent.setData(Uri.parse(smsNumber));
         // If package resolves (target app installed), send intent.
         if (smsIntent.resolveActivity(getPackageManager()) != null) {
-            Toast.makeText(this,"Opening SMS App",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Opening SMS App",Toast.LENGTH_LONG).show();
             startActivity(smsIntent);
-            Toast.makeText(this,"Opening Messaging App",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Opening Messaging App",Toast.LENGTH_LONG).show();
             }
             else {
             Log.e(TAG, "Can't resolve app for ACTION_SENDTO Intent.");
@@ -173,8 +203,18 @@ public class HomeLostActivity extends AppCompatActivity {
         intent.setType("message/rfc822");
         Intent mailer = Intent.createChooser(intent, "Send Email");
             startActivity(mailer);
-            Toast.makeText(this," Select Email Client",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this," Select Email Client",Toast.LENGTH_LONG).show();
     }
+
+
+
+
+    //for search results
+//
+//    public void updateList(LostItemsList newList){
+//        LostPost = new`
+
+//    }
 
     }
 

@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeLostActivity"
-    android:background="@drawable/hmebckgrnd">
+    tools:context=".HomeLostActivity"    >
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -24,15 +23,16 @@
 
 
     <include
-        layout="@layout/content_home_lost"
-        android:layout_height="119dp" />
+        layout="@layout/content_home_lost"         />
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/lostItemsList"
         android:layout_width="match_parent"
-        android:layout_height="510dp"
+        android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:background="@drawable/hmebckgrnd">
 
 
     </android.support.v7.widget.RecyclerView>

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <android.support.v7.widget.CardView android:layout_height="wrap_content"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -14,12 +13,30 @@
         android:layout_margin="10dp"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/lostimagespreview"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@drawable/noimage"
-            android:scaleType="centerCrop" />
+            android:layout_height="200dp">
+
+            <ImageView
+                android:id="@+id/lostimagespreview"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@drawable/noimage"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"/>
+
+        </RelativeLayout>
+
+
 
 
         <TextView
@@ -50,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:src="@drawable/ic_call_black_24dp"
+                app:srcCompat="@drawable/ic_call_black_24dp"
                 android:tint="@color/contactcolor"
                 android:onClick="dial_Number"/>
 
@@ -61,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/ic_message_black_24dp"
+                app:srcCompat="@drawable/ic_message_black_24dp"
                 android:tint="@color/contactcolor"
                 android:onClick="sms_SendMessage"/>
 
@@ -71,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
-                android:src="@drawable/ic_email_black_24dp"
+                app:srcCompat="@drawable/ic_email_black_24dp"
                 android:tint="@color/contactcolor"
                 android:onClick="sendEmail"/>
 

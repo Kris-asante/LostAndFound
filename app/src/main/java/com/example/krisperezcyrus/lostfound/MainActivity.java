@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity /*implements View.OnClickLis
 
 
     Button startbutton;
-    private static int SPLASH_TIME_OUT =3250;
+    private static int SPLASH_TIME_OUT =2000;
     private android.util.Log log;
 
     @Override
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity /*implements View.OnClickLis
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intentsignin = new Intent(MainActivity.this,SignInActivity.class);
+                Intent intentsignin = new Intent(MainActivity.this,SliderIntroActivity.class);
                 startActivity(intentsignin);
                 finish();
             }

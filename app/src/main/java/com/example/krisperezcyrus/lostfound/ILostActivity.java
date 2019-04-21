@@ -94,10 +94,6 @@ public class ILostActivity extends AppCompatActivity  {
         storageReference = FirebaseStorage.getInstance().getReference();
 
 
-        //how the display of the reported items are arranged in the newest above/top
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setReverseLayout(true);
-        linearLayoutManager.setStackFromEnd(true);
 
         /*listView =(ListView)findViewById(R.id.lostListView);
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,mDetails);
@@ -270,9 +266,10 @@ public class ILostActivity extends AppCompatActivity  {
                         newPost.child("description").setValue(yourdescription);
                         newPost.child("image").setValue(downloadurl.toString());
 
+                        //NOT QUIET SURE
+                        newPost.child("time").setValue(Util_time.getTimestamp());
 
 
-                        
 
 
                     }
@@ -281,9 +278,9 @@ public class ILostActivity extends AppCompatActivity  {
 
 
 
-                Intent intent = new Intent(ILostActivity.this, HomeLostActivity.class);
-                Toast.makeText(this, "Item Reported", Toast.LENGTH_LONG).show();
-                startActivity(intent);
+//                Intent intent = new Intent(ILostActivity.this, HomeLostActivity.class);
+//                Toast.makeText(this, "Item Reported", Toast.LENGTH_LONG).show();
+//                startActivity(intent);
             }else{
 
                 /*send notification to topic
@@ -312,16 +309,28 @@ public class ILostActivity extends AppCompatActivity  {
 
 
 
-                Toast.makeText(ILostActivity.this, "Image Upload Successful", Toast.LENGTH_LONG).show();
+                Toast.makeText(ILostActivity.this, "Checking Internet Connection To Post", Toast.LENGTH_LONG).show();
                 DatabaseReference newPost = databaseReference.push();
                 newPost.child("name").setValue(yourname);
                 newPost.child("email").setValue(youremail);
                 newPost.child("phone").setValue(yourphone);
                 newPost.child("description").setValue(yourdescription);
+                newPost.child("time").setValue(Util_time.getTimestamp());
+
 
                 Intent intent = new Intent(ILostActivity.this, HomeLostActivity.class);
                 Toast.makeText(this, "Item Reported", Toast.LENGTH_LONG).show();
                 startActivity(intent);
+
+
+
+                editTextname.setText("");
+                editTextemail.setText("");
+                editTextphone.setText("");
+                editTextdescription.setText("");
+
+
+
             }
 //
 //        } else {
@@ -333,7 +342,7 @@ public class ILostActivity extends AppCompatActivity  {
 //          Toast.makeText(this,"Enter valid Phone Number",Toast.LENGTH_LONG).show();
 //            }
 //            Toast.makeText(this,"Field cannot be left empty",Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(ILostActivity.this,ILostActivity.class);
+            Intent intent = new Intent(ILostActivity.this,HomeLostActivity.class);
             startActivity(intent);
         }
 
@@ -375,7 +384,7 @@ public class ILostActivity extends AppCompatActivity  {
         return m.matches();
     }
     public static boolean isValidName(String name) {
-        String ePattern ="^[A-Za-z]+$";
+        String ePattern ="^[A-Za-z- -A-Za-z]+$";
         java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
         java.util.regex.Matcher m = p.matcher(name);
         return m.matches();
@@ -387,4 +396,9 @@ public class ILostActivity extends AppCompatActivity  {
         java.util.regex.Matcher m = p.matcher(phone);
         return m.matches();
     }
+
+
+
+
+
 }

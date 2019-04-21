@@ -13,21 +13,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 
 public class HomeFoundActivity extends AppCompatActivity {
@@ -36,8 +42,6 @@ public class HomeFoundActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
 
     public static final String TAG = HomeFoundActivity.class.getSimpleName();
-
-
 
 
     @Override
@@ -49,7 +53,6 @@ public class HomeFoundActivity extends AppCompatActivity {
 
 
 
-
         FoundItemsList = findViewById(R.id.foundItemsList);
         FoundItemsList.setHasFixedSize(true);
         FoundItemsList.setLayoutManager(new LinearLayoutManager(this));
@@ -58,6 +61,8 @@ public class HomeFoundActivity extends AppCompatActivity {
 
 
     }
+
+
 
     @Override
     protected void onStart() {
@@ -76,8 +81,9 @@ public class HomeFoundActivity extends AppCompatActivity {
                 viewHolder.setName(model.getName());
                 viewHolder.setEmail(model.getEmail());
                 viewHolder.setPhone(model.getPhone());
+                viewHolder.setTime(model.getTime());
                 viewHolder.setDescription(model.getDescription());
-                //viewHolder.setImage(getApplication(),model.getImage());
+                viewHolder.setImage(getApplication(),model.getImage());
 
             }
         };
@@ -114,6 +120,19 @@ public class HomeFoundActivity extends AppCompatActivity {
             postphone.setText(phone);
         }
 
+
+        public void setTime(String time){
+
+            TextView postName = itemView.findViewById(R.id.time);
+            postName.setText(time);
+        }
+
+        public void setImage (Context ctx,String image){
+
+            ImageView postimage = itemView.findViewById(R.id.foundimagespreview);
+            Picasso.with(ctx).load(image).into(postimage);
+        }
+
         public void setDescription(String description) {
 
             TextView postdescription = itemView.findViewById(R.id.descriptionpost);
@@ -136,7 +155,7 @@ public class HomeFoundActivity extends AppCompatActivity {
         // If package resolves to an app, send intent.
         if (dialIntent.resolveActivity(getPackageManager()) != null) {
             startActivity(dialIntent);
-            Toast.makeText(this,"Opening Dialer",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Opening Dialer",Toast.LENGTH_LONG).show();
         } else {
             Log.e(TAG, "Can't resolve app for ACTION_DIAL Intent.");
             Toast.makeText(this,"Can't Make Call",Toast.LENGTH_LONG).show();
@@ -160,7 +179,7 @@ public class HomeFoundActivity extends AppCompatActivity {
         // If package resolves (target app installed), send intent.
         if (smsIntent.resolveActivity(getPackageManager()) != null) {
             startActivity(smsIntent);
-            Toast.makeText(this,"Opening Messaging App",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Opening Messaging App",Toast.LENGTH_LONG).show();
         } else {
             Log.e(TAG, "Can't resolve app for ACTION_SENDTO Intent.");
             Toast.makeText(this,"Can't SMS message number",Toast.LENGTH_LONG).show();
@@ -181,7 +200,7 @@ public class HomeFoundActivity extends AppCompatActivity {
         intent.setType("message/rfc822");
         Intent mailer = Intent.createChooser(intent, "Send Email");
         startActivity(mailer);
-        Toast.makeText(this," Select Email Client",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this," Select Email Client",Toast.LENGTH_LONG).show();
     }
 
 

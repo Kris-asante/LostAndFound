@@ -114,6 +114,7 @@ We have a vision on becoming the largest Lost &amp; Found application by helping
     <string name="todo">TODO</string>
     <string name="account_fragment">ACCOUNT FRAGMENT</string>
     <string name="textview">TextView</string>
+    <string name="title_activity_camera">CameraActivity</string>
 
 
 </resources>

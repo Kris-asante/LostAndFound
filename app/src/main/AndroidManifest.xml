@@ -21,7 +21,11 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".SignInActivity"
@@ -84,13 +88,8 @@
         </service>
 
         <activity android:name=".SearchActivity" />
-        <activity android:name=".SliderIntroActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".SliderIntroActivity" />
+        <activity android:name=".CameraActivity"></activity>
     </application>
 
 </manifest>

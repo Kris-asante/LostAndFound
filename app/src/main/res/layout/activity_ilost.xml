@@ -17,7 +17,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="64dp"
         android:hint="@string/your_name"
-        android:inputType="text"
+        android:inputType="text|textShortMessage"
         android:textSize="14sp" />
 
     <EditText
@@ -61,8 +61,7 @@
     <EditText
         android:id="@+id/descriptionTextView"
         android:layout_width="298dp"
-        android:layout_height="59dp"
-
+        android:layout_height="83dp"
         android:layout_centerInParent="true"
         android:ems="10"
         android:gravity="bottom"
@@ -93,9 +92,9 @@
         android:layout_marginBottom="14dp"
         android:layout_marginEnd="-109dp"
         android:layout_toStartOf="@+id/ilosttextView"
-        android:contentDescription="@string/todo"
-        android:src="@drawable/noimage"
-        />
+        android:contentDescription="@string/todo"/>
+        <!--android:src="@drawable/noimage"-->
+
 
     <Button
         android:id="@+id/ilostreportbtn"

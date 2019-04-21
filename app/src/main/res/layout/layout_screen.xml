@@ -1,20 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <ImageView
-        android:id="@+id/intro_img"
-        android:layout_width="149dp"
-        android:layout_height="153dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="106dp"
-        android:scaleType="fitXY"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+    android:layout_height="match_parent" >
 
 
     <android.support.constraint.Guideline
@@ -22,35 +11,58 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="326dp"
+
         app:layout_constraintGuide_percent="0.57" />
+    <!--app:layout_constraintGuide_begin="326dp"-->
+
 
     <TextView
+
         android:id="@+id/intro_title"
-        android:layout_width="281dp"
-        android:layout_height="96dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginBottom="170dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="50dp"
         android:text="@string/textview"
         android:textAlignment="center"
-        android:textSize="24dp"
-        android:textStyle="bold" />
+        android:textColor="#ffffff"
+        android:textSize="32dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline"
+        app:layout_editor_absoluteX="175dp" />
 
     <TextView
         android:id="@+id/intro_description"
-        android:layout_width="380dp"
-        android:layout_height="119dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="38dp"
-        android:fontFamily="serif"
-        android:lineSpacingExtra="1dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="8dp"
         android:text="@string/textview"
         android:textAlignment="center"
-        android:textSize="14sp"
-        android:typeface="serif" />
+        android:textColor="#ffffff"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/intro_title"
+        app:layout_constraintVertical_bias="0.13" />
+
+    <ImageView
+        android:id="@+id/intro_img"
+        android:layout_width="wrap_content"
+        android:layout_height="148dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/intro_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@mipmap/ic_launcher_round" />
 
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
