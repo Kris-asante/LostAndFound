@@ -16,6 +16,8 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 
 import android.widget.Button;
@@ -60,6 +62,16 @@ public class HomeFoundActivity extends AppCompatActivity {
 
 
 
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+//
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.toolbar_menu_search, menu);
+        return true;
     }
 
 

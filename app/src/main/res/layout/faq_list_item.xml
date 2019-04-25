@@ -5,9 +5,10 @@
 
 
     <TextView
+        android:lineSpacingExtra="3dp"
         android:id="@+id/lb1ListItem"
         android:paddingTop="5dp"
-        android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
+
         android:paddingBottom="5dp"
         android:textSize="16dp"
         android:layout_width="match_parent"

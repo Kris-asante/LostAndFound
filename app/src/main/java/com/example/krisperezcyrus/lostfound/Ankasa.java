@@ -1,10 +1,10 @@
 package com.example.krisperezcyrus.lostfound;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
+
 import android.support.v4.app.Fragment;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
@@ -16,24 +16,29 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
+
+
 import android.widget.TextView;
 
+
 import com.google.firebase.auth.FirebaseAuth;
+
 
 public class Ankasa extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 private FirebaseAuth mAuth;
 
-public FrameLayout frameLayout;
+//public FrameLayout frameLayout;
 
 //THE VARIABLES FOR THE BOTTOM NAVIGATION
-public BottomAccountFragment bottomAccountFragment;
-public BottomReportFragment bottomReportFragment;
-public BottomSearchFragment bottomSearchFragment;
-public BottomHomeFragment bottomHomeFragment;
+//public BottomAccountFragment bottomAccountFragment;
+//public BottomReportFragment bottomReportFragment;
+//public BottomSearchFragment bottomSearchFragment;
+//public BottomHomeFragment bottomHomeFragment;
 
 
-private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener;
+//private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,10 +119,10 @@ private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemS
 
         //this set the home as default fragment page
         android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.flMain,new HomeFragment());
+        ft.replace(R.id.flMain,new ReportItemFragment());
         ft.commit();
 
-        navigationView.setCheckedItem(R.id.nav_home);
+        navigationView.setCheckedItem(R.id.navigation_ReportItem);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -181,6 +186,12 @@ private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemS
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.ankasa, menu);
+
+
+
+
+        //searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+
         return true;
     }
 
@@ -193,16 +204,19 @@ private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemS
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.about_us)
-
-
         //will change this to about us
             {
                 startActivity(new Intent(Ankasa.this,AboutUsActivity.class));
 
             return false;
-        }else if (id == R.id.search){
 
-            startActivity(new Intent(Ankasa.this,SearchActivity.class));
+       // }else if (id == R.id.action_search){
+
+            //startActivity(new Intent(Ankasa.this,SearchActivity.class));
+
+
+
+
         }
 
         return super.onOptionsItemSelected(item);

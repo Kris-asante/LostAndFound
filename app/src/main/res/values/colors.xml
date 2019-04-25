@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#44474d</color>
-    <color name="colorPrimaryDark">#585b68</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#4e6183</color>
+    <color name="colorPrimaryDark">#4e6183</color>
+    <color name="colorAccent">#4e6183</color>
     <color name="likeWhite">#fff895</color>
     <color name="welcomeColor">#bfd9ff</color>
     <color name="buttonTextColor">#ffe343</color>
     <color name="signinbgclr">#cc1a1b1a</color>
     <color name="signinmessageclr">#000000</color>
-    <color name="buttnclrs4home">#a4a1a1</color>
-    <color name="bckgrndclrhome">#ccc1c1</color>
+    <color name="buttnclrs4home">#98b7ef</color>
+    <color name="bckgrndclrhome">#97b0dc</color>
     <color name="contactcolor">#349e1d</color>
 
     <color name="Slideprimary">#262938</color>
@@ -24,5 +24,9 @@
     <color name="gradient_end_color">#18a3fe</color>
 
     <color name="faqcolor">#4e6183</color>
+
+    <!--color name="colorPrimary">#44474d</color>-->
+<!--<color name="colorPrimaryDark">#585b68</color>-->
+<!--<color name="colorAccent">#FF4081</color>-->
 
 </resources>

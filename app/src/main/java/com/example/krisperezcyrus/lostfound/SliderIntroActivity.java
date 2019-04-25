@@ -33,15 +33,15 @@ public class SliderIntroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_slider_intro);
 
 
-//        //making the activity a full screen
+        //making the activity a full screen
 //        requestWindowFeature(Window.FEATURE_NO_TITLE);
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 //                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-//
-//       setContentView(R.layout.activity_slider_intro);
-//
-//       //hide the action bar
-//        getSupportActionBar().hide();
+
+       setContentView(R.layout.activity_slider_intro);
+
+       //hide the action bar
+        //getSupportActionBar().hide();
 
         //before this activity lunches we need to check if it has been opened before
         if (restorePrefData()){
@@ -63,10 +63,10 @@ public class SliderIntroActivity extends AppCompatActivity {
 
         //fill list screen
         final List<ScreenItem> mList = new ArrayList<>();
-        mList.add(new ScreenItem( "Lost&Found","Have you ever lost or found an item \nBest platform to make a report",R.drawable.logocircle));
-        mList.add(new ScreenItem("IMEI","Keep the IMEI of all your devices safe \nDial *#06# on mobile device to check ",R.drawable.imeicircle));
+        mList.add(new ScreenItem( "LOST&FOUND","Have you ever lost or found an item \nBest platform to make a report",R.drawable.logocircle));
+        mList.add(new ScreenItem("IMEI","Keep the IMEI of all your devices safe \nDial *#06# on mobile device to check",R.drawable.imeicircle));
         mList.add(new ScreenItem("OWNERSHIP","Report stolen items with IMEI to help prevent \npeople from buying it on selling platforms \nand to prove your ownership",R.drawable.ownercircle));
-        mList.add(new ScreenItem("INTERNET","Internet connectivity is required in almost all activities \nKindly be connected to the internet \nthroughout for ease of usage ",R.drawable.internetcircle));
+        mList.add(new ScreenItem("INTERNET","Internet connectivity is required in almost all activities \nKindly be connected to the internet \nthroughout for ease of usage",R.drawable.internetcircle ));
 
         //setup viewpager
 

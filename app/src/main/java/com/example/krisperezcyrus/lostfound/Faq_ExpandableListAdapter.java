@@ -11,14 +11,14 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.List;
 
-public class ExpandableListAdapter extends BaseExpandableListAdapter {
+public class Faq_ExpandableListAdapter extends BaseExpandableListAdapter {
 
     private Context context;
     private List<String> listDataHolder;
     private HashMap<String,List<String>> listHashMap;
 
 
-    public ExpandableListAdapter(Context context, List<String> listDataHolder, HashMap<String, List<String>> listHashMap) {
+    public Faq_ExpandableListAdapter(Context context, List<String> listDataHolder, HashMap<String, List<String>> listHashMap) {
         this.context = context;
         this.listDataHolder = listDataHolder;
         this.listHashMap = listHashMap;

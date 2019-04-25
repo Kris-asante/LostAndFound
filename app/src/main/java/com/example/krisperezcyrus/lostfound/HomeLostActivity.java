@@ -1,23 +1,28 @@
 package com.example.krisperezcyrus.lostfound;
 
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.squareup.picasso.Picasso;
 
 public class HomeLostActivity extends AppCompatActivity {
@@ -45,9 +50,9 @@ public class HomeLostActivity extends AppCompatActivity {
 
 
         //how the display of the reported items are arranged in the newest above/top
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setReverseLayout(true);
-        linearLayoutManager.setStackFromEnd(true);
+        LinearLayoutManager LostItemsList = new LinearLayoutManager(this);
+        LostItemsList.setReverseLayout(true);
+        LostItemsList.setStackFromEnd(true);
 
 
 
@@ -61,14 +66,71 @@ public class HomeLostActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.toolbar_menu_search,menu);
+//
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.toolbar_menu_search, menu);
+//        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+//        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+//        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+//
+
+        // the previous one there getMenuInflater().inflate(R.menu.toolbar_menu_search,menu);
+        // searchView.setQueryHint("Search Item");
+        //searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+       // final SearchView searchView =(SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.toolbar));
+        //searchView.setSubmitButtonEnabled(true);
+        //searchView.setSubmitButtonEnabled(true);
 
 
-        return true;
-    }
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                //SearchText.setText(newText);
+//                Query Q = mDatabase.child("Lost").orderByChild("Name").startAt(newText).endAt(newText+"\uf8ff");
+//                //endAt("~");
+//                FirebaseRecyclerAdapter <LostPost,HomeLostActivity.LostitemViewHolder> fbra = new FirebaseRecyclerAdapter
+//                        <LostPost, HomeLostActivity.LostitemViewHolder>
+//                        (
+//
+//                        LostPost.class,
+//                        R.layout.lostlayout,
+//                        HomeLostActivity.LostitemViewHolder.class,
+//                        mDatabase
+//                ) {
+//                    //@Override
+//                    protected void populateViewHolder(HomeLostActivity.LostitemViewHolder viewHolder, LostPost model, int position) {
+//
+//                        viewHolder.setName(model.getName());
+//                        viewHolder.setEmail(model.getEmail());
+//                        viewHolder.setPhone(model.getPhone());
+//                        viewHolder.setDescription(model.getDescription());
+//                        viewHolder.setTime(model.getTime());
+//                        viewHolder.setImage(getApplication(),model.getImage());
+//
+//                    }
+//                };
+//
+//                LostItemsList.setAdapter(fbra);
+//
+//
+//
+//                return false;
+//            }
+//
+//
+//        });
 
-    @Override
-    protected void onStart() {
+
+            return true;
+        }
+
+        @Override
+        protected void onStart() {
         super.onStart();
         FirebaseRecyclerAdapter <LostPost,HomeLostActivity.LostitemViewHolder> fbra = new FirebaseRecyclerAdapter<LostPost, HomeLostActivity.LostitemViewHolder>(
 
