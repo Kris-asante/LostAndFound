@@ -10,7 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
@@ -54,18 +56,27 @@ public class CameraActivity extends AppCompatActivity {
         if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK){
 
             Uri uri = data.getData();
-            StorageReference filepath = mStorageReference.child("FoundImageUpload").child(uri.getLastPathSegment());
 
-            filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+            startActivity(new Intent(CameraActivity.this, IFoundActivity.class)
+                .putExtra("image_uri", uri.toString())
+            );
 
-                    final Uri downloadurl = taskSnapshot.getDownloadUrl();
-                    Picasso.with(CameraActivity.this).load(downloadurl).fit().centerCrop().into(mImage);
+            finish();
 
-
-                }
-            });
+//            StorageReference filepath = mStorageReference.child("FoundImageUpload").child(uri.getLastPathSegment());
+//
+//            filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                    //
+//                @Override
+//                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//
+//                 //final Uri downloadurl = taskSnapshot.getDownloadUrl();
+//                    taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
+//                    Picasso.with(CameraActivity.this).load(downloadurl).fit().centerCrop().into(mImage);
+//
+//
+//                }
+//            });
         }
     }
 }

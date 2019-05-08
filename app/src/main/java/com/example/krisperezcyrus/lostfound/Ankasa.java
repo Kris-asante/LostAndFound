@@ -210,9 +210,9 @@ private FirebaseAuth mAuth;
 
             return false;
 
-       // }else if (id == R.id.action_search){
+       }else if (id == R.id.contact_us){
 
-            //startActivity(new Intent(Ankasa.this,SearchActivity.class));
+            startActivity(new Intent(Ankasa.this,ContactUsActivity.class));
 
 
 

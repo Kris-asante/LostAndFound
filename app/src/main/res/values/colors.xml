@@ -24,6 +24,10 @@
     <color name="gradient_end_color">#18a3fe</color>
 
     <color name="faqcolor">#4e6183</color>
+    <color name="colorRed">#ff0000</color>
+
+    <color name="bckreport">#FFA2B1CC</color>
+
 
     <!--color name="colorPrimary">#44474d</color>-->
 <!--<color name="colorPrimaryDark">#585b68</color>-->

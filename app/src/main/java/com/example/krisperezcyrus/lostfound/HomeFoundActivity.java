@@ -2,16 +2,18 @@ package com.example.krisperezcyrus.lostfound;
 
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -40,6 +42,9 @@ import com.squareup.picasso.Picasso;
 
 public class HomeFoundActivity extends AppCompatActivity {
 
+    LinearLayoutManager mLayoutManager;
+
+
     private RecyclerView FoundItemsList;
     private DatabaseReference mDatabase;
 
@@ -62,6 +67,24 @@ public class HomeFoundActivity extends AppCompatActivity {
 
 
 
+
+        //how the display of the reported items are arranged in the newest above/top
+        //LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+
+
+
+        mLayoutManager = new LinearLayoutManager(this);
+        mLayoutManager.setReverseLayout(true);
+        mLayoutManager.setStackFromEnd(true);
+
+        //RecyclerView
+
+        FoundItemsList.setHasFixedSize(true);
+
+        //set layout as LinearLayout
+        FoundItemsList.setLayoutManager(mLayoutManager);
+
+
     }
 
 
@@ -69,8 +92,116 @@ public class HomeFoundActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
 
 //
+
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.toolbar_menu_search, menu);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
+
+        // the previous one there getMenuInflater().inflate(R.menu.toolbar_menu_search,menu);
+        // searchView.setQueryHint("Search Item");
+        //searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        // final SearchView searchView =(SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.toolbar));
+        //searchView.setSubmitButtonEnabled(true);
+        //searchView.setSubmitButtonEnabled(true);
+
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+
+                String text = query.toLowerCase();
+
+                Query firebaseSearchQuery = mDatabase.orderByChild("description").startAt(text).endAt(text + "\uf8ff");
+                FirebaseRecyclerAdapter <FoundPost,HomeFoundActivity.FounditemViewHolder>
+                        fbra = new FirebaseRecyclerAdapter<FoundPost, HomeFoundActivity.FounditemViewHolder>(
+
+                        FoundPost.class,
+                        R.layout.foundlayout,
+                        HomeFoundActivity.FounditemViewHolder.class,
+                        firebaseSearchQuery
+                )
+
+                {
+                    //@Override
+                    protected void populateViewHolder(HomeFoundActivity.FounditemViewHolder viewHolder, FoundPost model, int position) {
+
+                        viewHolder.setName(model.getName());
+                        viewHolder.setEmail(model.getEmail());
+                        viewHolder.setPhone(model.getPhone());
+                        viewHolder.setDescription(model.getDescription());
+                        viewHolder.setTime(model.getTime());
+                        viewHolder.setImage(getApplication(),model.getImage());
+
+
+
+
+                    }
+                };
+
+                FoundItemsList.setAdapter(fbra);
+
+
+
+
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //SearchText.setText(newText);
+
+
+
+                String text = newText.toLowerCase();
+
+                Query firebaseSearchQuery = mDatabase.orderByChild("description").startAt(text).endAt(text + "\uf8ff");
+                FirebaseRecyclerAdapter <FoundPost,HomeFoundActivity.FounditemViewHolder>
+                        fbra = new FirebaseRecyclerAdapter<FoundPost, HomeFoundActivity.FounditemViewHolder>(
+
+                        FoundPost.class,
+                        R.layout.foundlayout,
+                        HomeFoundActivity.FounditemViewHolder.class,
+                        firebaseSearchQuery
+                )
+
+                {
+                    //@Override
+                    protected void populateViewHolder(HomeFoundActivity.FounditemViewHolder viewHolder, FoundPost model, int position) {
+
+                        viewHolder.setName(model.getName());
+                        viewHolder.setEmail(model.getEmail());
+                        viewHolder.setPhone(model.getPhone());
+                        viewHolder.setDescription(model.getDescription());
+                        viewHolder.setTime(model.getTime());
+                        viewHolder.setImage(getApplication(),model.getImage());
+
+
+
+
+//
+                    }
+                };
+
+                FoundItemsList.setAdapter(fbra);
+
+
+
+
+
+
+
+                return false;
+            }
+
+
+        });
+
+
         return true;
     }
 
@@ -79,12 +210,13 @@ public class HomeFoundActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseRecyclerAdapter<FoundPost, HomeFoundActivity.FounditemViewHolder> fbra = new FirebaseRecyclerAdapter<FoundPost, HomeFoundActivity.FounditemViewHolder>(
+        FirebaseRecyclerAdapter <FoundPost,HomeFoundActivity.FounditemViewHolder> fbra = new FirebaseRecyclerAdapter<FoundPost, HomeFoundActivity.FounditemViewHolder>(
 
                 FoundPost.class,
                 R.layout.foundlayout,
                 HomeFoundActivity.FounditemViewHolder.class,
                 mDatabase
+
         ) {
 
             // @Override
@@ -142,7 +274,8 @@ public class HomeFoundActivity extends AppCompatActivity {
         public void setImage (Context ctx,String image){
 
             ImageView postimage = itemView.findViewById(R.id.foundimagespreview);
-            Picasso.with(ctx).load(image).into(postimage);
+           Picasso.with(ctx).load(image).into(postimage);
+           //Picasso.get().load(image).into(postimage);
         }
 
         public void setDescription(String description) {

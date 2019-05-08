@@ -2,11 +2,14 @@ package com.example.krisperezcyrus.lostfound;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,7 +25,11 @@ import com.example.krisperezcyrus.lostfound.Model.MyResponse;
 import com.example.krisperezcyrus.lostfound.Model.Notification;
 import com.example.krisperezcyrus.lostfound.Model.Sender;
 import com.example.krisperezcyrus.lostfound.Remote.APIService;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -65,6 +72,8 @@ public class ILostActivity extends AppCompatActivity  {
     private static final int GALLARY_INTENT = 5;
     private ImageView imageView;
     Uri uri;
+
+    private TextView mCount;
     //private ArrayList<String> mDetails = new ArrayList<>();
 
     //ListView listView;
@@ -92,6 +101,29 @@ public class ILostActivity extends AppCompatActivity  {
 
 
         storageReference = FirebaseStorage.getInstance().getReference();
+
+        mCount = findViewById(R.id.title_counter);
+
+
+        //for counting derscription characters
+        editTextdescription.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String text = editTextdescription.getText().toString();
+                mCount.setText(text.length()+"/150");
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
 
 
@@ -253,27 +285,77 @@ public class ILostActivity extends AppCompatActivity  {
             if(uri != null) {
                 //Uri uri = Uri.parse("android.resource://com.example.krisperezcyrus.lostfound/drawable/noimage");
                 // this is for upload of image to the cloud
-                StorageReference filepath = storageReference.child("ImageUpload").child(uri.getLastPathSegment());
-                filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                final StorageReference filepath = storageReference.child("ImageUpload").child(uri.getLastPathSegment());
+                filepath.putFile(uri)
+//                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                    @Override
+//                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                        final Uri downloadurl = taskSnapshot.getDownloadUrl();
+
+                        .continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                            @Override
+                            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                                // Forward any exceptions
+                                if (!task.isSuccessful()) {
+                                    throw task.getException();
+                                }
+
+
+
+                                // Request the public download URL
+                                return filepath.getDownloadUrl();
+                            }
+                        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                     @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        final Uri downloadurl = taskSnapshot.getDownloadUrl();
-                        Toast.makeText(ILostActivity.this, "Image Upload Successful", Toast.LENGTH_LONG).show();
-                        DatabaseReference newPost = databaseReference.push();
-                        newPost.child("name").setValue(yourname);
-                        newPost.child("email").setValue(youremail);
-                        newPost.child("phone").setValue(yourphone);
-                        newPost.child("description").setValue(yourdescription);
-                        newPost.child("image").setValue(downloadurl.toString());
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if (task.isSuccessful()) {
+                            String downloadurl = task.getResult().toString();
+                            Log.d("VIDEO PREVIEW", "onComplete: Url: " + downloadurl);
 
-                        //NOT QUIET SURE
-                        newPost.child("time").setValue(Util_time.getTimestamp());
+                            Toast.makeText(ILostActivity.this, "Image Upload Successful", Toast.LENGTH_LONG).show();
+                            DatabaseReference newPost = databaseReference.push();
+                            newPost.child("name").setValue(yourname);
+                            newPost.child("email").setValue(youremail);
+                            newPost.child("phone").setValue(yourphone);
+                            newPost.child("description").setValue(yourdescription);
+                            newPost.child("image").setValue(downloadurl);
+
+                            //NOT QUIET SURE
+                            newPost.child("time").setValue(Util_time.getTimestamp());
+
+                            finish();
 
 
-
+                        }
 
                     }
                 });
+//                }).addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                    @Override
+//                    public void onSuccess(@NonNull Uri downloadUri) {
+//                        // Upload succeeded
+//                        //Log.d(TAG, "uploadFromUri: getDownloadUri success");
+//
+//                        // [START_EXCLUDE]
+//                        //broadcastUploadFinished(downloadUri, filepath);
+//                        //showUploadFinishedNotification(downloadUri, filepath);
+//                       // taskCompleted();
+//                        // [END_EXCLUDE]
+//                    }
+//                })
+//                        .addOnFailureListener(new OnFailureListener() {
+//                            @Override
+//                            public void onFailure(@NonNull Exception exception) {
+//                                // Upload failed
+//                               // Log.w(TAG, "uploadFromUri:onFailure", exception);
+//
+//                                // [START_EXCLUDE]
+//                               // broadcastUploadFinished(null, fileUri);
+//                                //showUploadFinishedNotification(null, fileUri);
+//                                //taskCompleted();
+//                                //// [END_EXCLUDE]
+//                            }
+//                        });
 
 
 
@@ -317,17 +399,20 @@ public class ILostActivity extends AppCompatActivity  {
                 newPost.child("description").setValue(yourdescription);
                 newPost.child("time").setValue(Util_time.getTimestamp());
 
+                finish();
+
+
 
                 Intent intent = new Intent(ILostActivity.this, HomeLostActivity.class);
                 Toast.makeText(this, "Item Reported", Toast.LENGTH_LONG).show();
                 startActivity(intent);
 
-
-
                 editTextname.setText("");
                 editTextemail.setText("");
                 editTextphone.setText("");
                 editTextdescription.setText("");
+
+
 
 
 

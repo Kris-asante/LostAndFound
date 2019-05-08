@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".IFoundActivity"
-    android:background="@color/bckgrndclrhome">
+    android:background="@color/bckreport">
 
 
 
@@ -88,19 +88,17 @@
         <!--android:onClick="camerabtnclicked"/>-->
 
 
-
-
     <ImageView
         android:id="@+id/Cameraimageview"
         android:layout_width="229dp"
         android:layout_height="177dp"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="24dp"
         android:layout_marginStart="12dp"
+        android:layout_marginBottom="24dp"
         android:contentDescription="@string/todo"
-        />
+        android:visibility="visible" />
 
     <Button
         android:id="@+id/ifoundreportbtn"

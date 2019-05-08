@@ -67,7 +67,7 @@ public class HomeFragment extends Fragment {
 
                 Intent i = new Intent(getActivity(), HomeLostActivity.class);
                 startActivity(i);
-                Toast.makeText(getActivity(), "Lost Items", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Loading Lost Items", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -78,7 +78,7 @@ public class HomeFragment extends Fragment {
 
                 Intent i = new Intent(getActivity(), HomeFoundActivity.class);
                 startActivity(i);
-                Toast.makeText(getActivity(), "Found Items", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Loading Found Items", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -92,6 +92,7 @@ public class HomeFragment extends Fragment {
         final List<Home_ScreenItem> mList = new ArrayList<>();
 
         mList.add(new Home_ScreenItem("Keep the IMEI of your device safe.\nDial *#06# on mobile device to check."));
+        mList.add(new Home_ScreenItem("Take pictures of your precious and valuable items and save on your phone"));
         mList.add(new Home_ScreenItem("Before you report an item as lost or found, kindly check if someone has reported it already and contact the person."));
         mList.add(new Home_ScreenItem("Kindly be connected to the internet throughout for ease of usage."));
 

@@ -115,6 +115,8 @@ We have a vision on becoming the largest Lost &amp; Found application by helping
     <string name="account_fragment">ACCOUNT FRAGMENT</string>
     <string name="textview">TextView</string>
     <string name="title_activity_camera">CameraActivity</string>
+    <string name="_0_100">0/100</string>
+    <string name="why_lost_amp_found"><![CDATA[Why Lost&Found]]></string>
 
 
 </resources>

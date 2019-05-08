@@ -1,8 +1,10 @@
 package com.example.krisperezcyrus.lostfound;
 
 
+import android.content.Context;
 import android.content.Intent;
 
+import android.graphics.Bitmap;
 import android.net.Uri;
 
 
@@ -12,20 +14,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
+
+import java.io.ByteArrayOutputStream;
 
 
 public class IFoundActivity extends AppCompatActivity {
@@ -38,8 +46,10 @@ public class IFoundActivity extends AppCompatActivity {
 
 
 
-//camera
-    Uri uri;
+
+    //camera
+    Uri uri, imageUri;
+    byte[] image;
     private Button cameraBtn;
     private ImageView imageview;
     private static final int CAMERA_REQUEST_CODE = 3;
@@ -63,12 +73,16 @@ public class IFoundActivity extends AppCompatActivity {
         editTextphone =  findViewById(R.id.phone);
         editTextdescription = findViewById(R.id.descriptionTextView);
 
-        databaseReference = database.getInstance().getReference().child("Found");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Found");
+        // database.getInstance() was the initial  thing
 //
         //storageReference = FirebaseStorage.getInstance().getReference();
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setReverseLayout(true);
-        linearLayoutManager.setStackFromEnd(true);
+        // LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        // linearLayoutManager.setReverseLayout(true);
+        //linearLayoutManager.setStackFromEnd(true);
+
+
+
 
 
 
@@ -85,7 +99,9 @@ public class IFoundActivity extends AppCompatActivity {
         });
         //end
 
-
+       /* String image = getIntent().getStringExtra("image_uri");
+        imageUri = Uri.parse(image);
+        imageview.setImageURI(imageUri);*/
 
 
     }
@@ -170,28 +186,81 @@ public class IFoundActivity extends AppCompatActivity {
 
 
             // for camera
-            if (uri != null) {
+
                 //Uri uri = Uri.parse("android.resource://com.example.krisperezcyrus.lostfound/drawable/noimage");
                 // this is for upload of image to the cloud
-                StorageReference filepath = storageReference.child("FoundImageUpload").child(uri.getLastPathSegment());
-                filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        final Uri downloadurl = taskSnapshot.getDownloadUrl();
-                        Toast.makeText(IFoundActivity.this, "Image Upload Successful", Toast.LENGTH_LONG).show();
-                        DatabaseReference newPost = databaseReference.push();
-                        newPost.child("name").setValue(yourname);
-                        newPost.child("email").setValue(youremail);
-                        newPost.child("phone").setValue(yourphone);
-                        newPost.child("description").setValue(yourdescription);
-                        newPost.child("time").setValue(Util_time.getTimestamp());
-                        newPost.child("image").setValue(downloadurl.toString());
 
-                        //NOT QUIET SURE
-                        newPost.child("time").setValue(Util_time.getTimestamp());
+
+//                StorageReference filepath = storageReference.child("FoundImageUpload").child(uri.getLastPathSegment());
+//                filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//
+//                    @Override
+//                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                       final Uri downloadurl = taskSnapshot.getDownloadUrl();
+
+
+            if (image != null) {
+
+                final StorageReference filepath = storageReference.child("FoundUpload").child(uri.getLastPathSegment());
+                filepath.putBytes(image)
+//                                this was changed and converted from the "." downwards
+//                                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                            @Override
+//                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                                filepath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                                    @Override
+//                                    public void onSuccess(Uri uri) {
+//                                        final Uri downloadurl = uri;
+                        .continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                            @Override
+                            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                                // Forward any exceptions
+                                if (!task.isSuccessful()) {
+                                    throw task.getException();
+                                }
+
+
+
+                                // Request the public download URL
+                                return filepath.getDownloadUrl();
+                            }
+                        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if (task.isSuccessful()) {
+                            String downloadurl = task.getResult().toString();
+                            Log.d("IMAGE PREVIEW", "onComplete: Url: ");
+
+
+
+                            Toast.makeText(IFoundActivity.this, "Image Upload Successful", Toast.LENGTH_LONG).show();
+                            DatabaseReference newPost = databaseReference.push();
+                            newPost.child("name").setValue(yourname);
+                            newPost.child("email").setValue(youremail);
+                            newPost.child("phone").setValue(yourphone);
+                            newPost.child("description").setValue(yourdescription);
+                            newPost.child("time").setValue(Util_time.getTimestamp());
+                            newPost.child("image").setValue(downloadurl);
+
+                            //NOT QUIET SURE
+                            newPost.child("time").setValue(Util_time.getTimestamp());
+
+                            finish();
+
+                        }
                     }
                 });
-            } else {
+
+
+
+
+
+
+
+                // }// like the above, removed but
+                // }); // like the above, this bracket is supposed to be removed
+            }
+            else {
                 //end camera
 
 
@@ -210,6 +279,8 @@ public class IFoundActivity extends AppCompatActivity {
                 newPost.child("time").setValue(Util_time.getTimestamp());
                 // newPost.child("image").setValue(downloadurl.toString());
 
+
+                finish();
                 // }
 
 
@@ -219,13 +290,9 @@ public class IFoundActivity extends AppCompatActivity {
                 Toast.makeText(this, "Item Reported", Toast.LENGTH_LONG).show();
                 startActivity(intent);
 
-
-                editTextname.setText("");
-                editTextemail.setText("");
-                editTextphone.setText("");
-                editTextdescription.setText("");
             }
         }
+
     }
 
 //    public void camerabtnclicked(View view) {
@@ -293,8 +360,17 @@ public class IFoundActivity extends AppCompatActivity {
 
         if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK){
 
-            uri = data.getData();
-            imageview.setImageURI(uri);
+            /*uri = data.getData();
+            imageview.setImageURI(uri);*/
+
+
+            Bitmap photo = (Bitmap)data.getExtras()
+                    .get("data");
+
+            // Set the image in imageview for display
+            imageview.setImageBitmap(photo);
+            //uri = getImageUri(getApplicationContext(), photo);
+            image = getImageUri(photo);
 
 
 //           StorageReference filepath = storageReference.child("FoundImageUpload").child(uri.getLastPathSegment());
@@ -310,6 +386,19 @@ public class IFoundActivity extends AppCompatActivity {
 //                }
 //            });
         }
+    }
+
+
+    public byte[] getImageUri( Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.PNG, 100, bytes);
+       // inImage.compress(Bitmap.CompressFormat.PNG, 100, bytes);
+        byte[] data = bytes.toByteArray();
+
+
+
+        //String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return data;
     }
 
 

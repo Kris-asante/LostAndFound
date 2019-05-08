@@ -13,9 +13,11 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.SearchView;
+import android.support.v7.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +31,8 @@ public class HomeLostActivity extends AppCompatActivity {
 
     private RecyclerView LostItemsList ;
     private DatabaseReference mDatabase;
+
+    LinearLayoutManager mLayoutManager;
 
     public static final String TAG = HomeLostActivity.class.getSimpleName();
 
@@ -50,9 +54,20 @@ public class HomeLostActivity extends AppCompatActivity {
 
 
         //how the display of the reported items are arranged in the newest above/top
-        LinearLayoutManager LostItemsList = new LinearLayoutManager(this);
-        LostItemsList.setReverseLayout(true);
-        LostItemsList.setStackFromEnd(true);
+        //LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+
+
+
+        mLayoutManager = new LinearLayoutManager(this);
+        mLayoutManager.setReverseLayout(true);
+        mLayoutManager.setStackFromEnd(true);
+
+        //RecyclerView
+
+        LostItemsList.setHasFixedSize(true);
+
+        //set layout as LinearLayout
+        LostItemsList.setLayoutManager(mLayoutManager);
 
 
 
@@ -60,7 +75,52 @@ public class HomeLostActivity extends AppCompatActivity {
     }
 
 
-    // for the search icon on the app bar
+    // for the search icon on the app bar. A method was used here: firebaseSearch().Which is way below
+		
+
+
+
+
+
+
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        //inflate the menu; this adds items to the action bar if it present
+//        getMenuInflater().inflate(R.menu.toolbar_menu_search, menu);
+//        MenuItem item = menu.findItem(R.id.action_search);
+//        SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+//
+//
+//
+//
+//////
+////        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+////        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+////        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+//
+//
+//
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                firebaseSearch(query);
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                //Filter as you type
+//                firebaseSearch(newText);
+//                return false;
+//            }
+//        });
+//        return super.onCreateOptionsMenu(menu);
+//    }
+
+
+
+
 
 
     @Override
@@ -69,10 +129,10 @@ public class HomeLostActivity extends AppCompatActivity {
 //
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.toolbar_menu_search, menu);
-//        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-//        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-//        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-//
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
 
         // the previous one there getMenuInflater().inflate(R.menu.toolbar_menu_search,menu);
         // searchView.setQueryHint("Search Item");
@@ -82,17 +142,39 @@ public class HomeLostActivity extends AppCompatActivity {
         //searchView.setSubmitButtonEnabled(true);
 
 
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                //SearchText.setText(newText);
-//                Query Q = mDatabase.child("Lost").orderByChild("Name").startAt(newText).endAt(newText+"\uf8ff");
-//                //endAt("~");
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+
+                String text = query.toLowerCase();
+
+                Query firebaseSearchQuery = mDatabase.orderByChild("description").startAt(text).endAt(text + "\uf8ff");
+                FirebaseRecyclerAdapter <LostPost,HomeLostActivity.LostitemViewHolder>
+                        fbra = new FirebaseRecyclerAdapter<LostPost, HomeLostActivity.LostitemViewHolder>(
+
+                        LostPost.class,
+                        R.layout.lostlayout,
+                        HomeLostActivity.LostitemViewHolder.class,
+                        firebaseSearchQuery
+                )
+
+                {
+                    //@Override
+                    protected void populateViewHolder(HomeLostActivity.LostitemViewHolder viewHolder, LostPost model, int position) {
+
+                        viewHolder.setName(model.getName());
+                        viewHolder.setEmail(model.getEmail());
+                        viewHolder.setPhone(model.getPhone());
+                        viewHolder.setDescription(model.getDescription());
+                        viewHolder.setTime(model.getTime());
+                        viewHolder.setImage(getApplication(),model.getImage());
+
+
+
+
+//                Query Q = mDatabase.child("Lost").orderByChild("description").startAt(newText).endAt("~");
+//                // endAt(newText+"\uf8ff");
 //                FirebaseRecyclerAdapter <LostPost,HomeLostActivity.LostitemViewHolder> fbra = new FirebaseRecyclerAdapter
 //                        <LostPost, HomeLostActivity.LostitemViewHolder>
 //                        (
@@ -111,19 +193,88 @@ public class HomeLostActivity extends AppCompatActivity {
 //                        viewHolder.setDescription(model.getDescription());
 //                        viewHolder.setTime(model.getTime());
 //                        viewHolder.setImage(getApplication(),model.getImage());
+
+                    }
+                };
+
+                LostItemsList.setAdapter(fbra);
+
+
+
+
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //SearchText.setText(newText);
+
+
+
+                String text = newText.toLowerCase();
+
+                Query firebaseSearchQuery = mDatabase.orderByChild("description").startAt(text).endAt(text + "\uf8ff");
+                FirebaseRecyclerAdapter <LostPost,HomeLostActivity.LostitemViewHolder>
+                        fbra = new FirebaseRecyclerAdapter<LostPost, HomeLostActivity.LostitemViewHolder>(
+
+                        LostPost.class,
+                        R.layout.lostlayout,
+                        HomeLostActivity.LostitemViewHolder.class,
+                        firebaseSearchQuery
+                )
+
+                {
+                    //@Override
+                    protected void populateViewHolder(HomeLostActivity.LostitemViewHolder viewHolder, LostPost model, int position) {
+
+                        viewHolder.setName(model.getName());
+                        viewHolder.setEmail(model.getEmail());
+                        viewHolder.setPhone(model.getPhone());
+                        viewHolder.setDescription(model.getDescription());
+                        viewHolder.setTime(model.getTime());
+                        viewHolder.setImage(getApplication(),model.getImage());
+
+
+
+
+//                Query Q = mDatabase.child("Lost").orderByChild("description").startAt(newText).endAt("~");
+//                // endAt(newText+"\uf8ff");
+//                FirebaseRecyclerAdapter <LostPost,HomeLostActivity.LostitemViewHolder> fbra = new FirebaseRecyclerAdapter
+//                        <LostPost, HomeLostActivity.LostitemViewHolder>
+//                        (
 //
-//                    }
-//                };
+//                        LostPost.class,
+//                        R.layout.lostlayout,
+//                        HomeLostActivity.LostitemViewHolder.class,
+//                        mDatabase
+//                ) {
+//                    //@Override
+//                    protected void populateViewHolder(HomeLostActivity.LostitemViewHolder viewHolder, LostPost model, int position) {
 //
-//                LostItemsList.setAdapter(fbra);
-//
-//
-//
-//                return false;
-//            }
-//
-//
-//        });
+//                        viewHolder.setName(model.getName());
+//                        viewHolder.setEmail(model.getEmail());
+//                        viewHolder.setPhone(model.getPhone());
+//                        viewHolder.setDescription(model.getDescription());
+//                        viewHolder.setTime(model.getTime());
+//                        viewHolder.setImage(getApplication(),model.getImage());
+
+                    }
+                };
+
+                LostItemsList.setAdapter(fbra);
+
+
+
+
+
+
+
+                return false;
+            }
+
+
+        });
 
 
             return true;
@@ -152,14 +303,17 @@ public class HomeLostActivity extends AppCompatActivity {
                 viewHolder.setImage(getApplication(),model.getImage());
 
             }
+
         };
 
 
         LostItemsList.setAdapter(fbra);
 
-    }
 
-    public static class LostitemViewHolder extends RecyclerView.ViewHolder{
+            }
+
+
+            public static class LostitemViewHolder extends RecyclerView.ViewHolder{
 
         public LostitemViewHolder (View itemView){
             super(itemView);
@@ -195,15 +349,15 @@ public class HomeLostActivity extends AppCompatActivity {
 
         public void setTime(String time){
 
-            TextView postName = itemView.findViewById(R.id.time);
-            postName.setText(time);
+            TextView posttime = itemView.findViewById(R.id.time);
+            posttime.setText(time);
         }
 
 
-        public void setImage (Context ctx,String image){
+        public void setImage (Context ctx,String Image){
 
             ImageView postimage = itemView.findViewById(R.id.lostimagespreview);
-            Picasso.with(ctx).load(image).into(postimage);
+            Picasso.with(ctx).load(Image).into(postimage);
         }
 
     }
@@ -271,13 +425,82 @@ public class HomeLostActivity extends AppCompatActivity {
 
 
 
-    //for search results
-//
-//    public void updateList(LostItemsList newList){
-//        LostPost = new`
 
+    //search data
+//    private void firebaseSearch(String searchText) {
+//
+//        //convert string entered in SearchView to lowercase
+//        String query = searchText.toLowerCase();
+//
+//        Query firebaseSearchQuery = mDatabase.orderByChild("description").startAt(query).endAt(query + "\uf8ff");
+//        FirebaseRecyclerAdapter <LostPost,HomeLostActivity.LostitemViewHolder>
+//                fbra = new FirebaseRecyclerAdapter<LostPost, HomeLostActivity.LostitemViewHolder>(
+//
+//                LostPost.class,
+//                R.layout.lostlayout,
+//                HomeLostActivity.LostitemViewHolder.class,
+//                firebaseSearchQuery
+//        )
+//
+//        {
+//                    //@Override
+//                    protected void populateViewHolder(HomeLostActivity.LostitemViewHolder viewHolder, LostPost model, int position) {
+//
+//                        viewHolder.setName(model.getName());
+//                        viewHolder.setEmail(model.getEmail());
+//                        viewHolder.setPhone(model.getPhone());
+//                        viewHolder.setDescription(model.getDescription());
+//                        viewHolder.setTime(model.getTime());
+//                        viewHolder.setImage(getApplication(),model.getImage());
+//                    }
+//
+//
+//            @Override
+//            public LostitemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+//
+//                LostitemViewHolder lostitemViewHolder = super.onCreateViewHolder(parent, viewType);
+//
+//
+//                TextView postName = findViewById(R.id.namepost);
+//
+//                TextView postemail = findViewById(R.id.emailpost);
+//
+//                TextView postphone = findViewById(R.id.phonepost);
+//
+//                TextView postdescription = findViewById(R.id.descriptionpost);
+//
+//                ImageView postimage = findViewById(R.id.lostimagespreview);
+//
+//                TextView posttime = findViewById(R.id.time);
+//
+//
+//                 String name = postName.getText().toString().trim();
+//                 String email = postemail.getText().toString().trim();
+//                 String phone = postphone.getText().toString().trim();
+//                 String description = postdescription.getText().toString();
+//                 String time = posttime.getText().toString().trim();
+//                 String yourimage = postimage.toString().trim();
+//
+//
+//
+//                return lostitemViewHolder;
+//            }
+//
+//
+//
+//                };
+//
+//        //set adapter to recyclerview
+//        LostItemsList.setAdapter(fbra);
 //    }
 
-    }
+
+
+
+
+
+
+
+}
 
 
