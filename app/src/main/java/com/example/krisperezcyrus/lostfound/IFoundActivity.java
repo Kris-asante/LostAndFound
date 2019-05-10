@@ -201,7 +201,7 @@ public class IFoundActivity extends AppCompatActivity {
 
             if (image != null) {
 
-                final StorageReference filepath = storageReference.child("FoundUpload").child(uri.getLastPathSegment());
+                final StorageReference filepath = storageReference.child("FoundUpload").child(image.toString());
                 filepath.putBytes(image)
 //                                this was changed and converted from the "." downwards
 //                                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -392,12 +392,7 @@ public class IFoundActivity extends AppCompatActivity {
     public byte[] getImageUri( Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.PNG, 100, bytes);
-       // inImage.compress(Bitmap.CompressFormat.PNG, 100, bytes);
         byte[] data = bytes.toByteArray();
-
-
-
-        //String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
         return data;
     }
 

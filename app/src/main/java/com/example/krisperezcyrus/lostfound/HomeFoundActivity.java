@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v4.app.ActivityCompat;
@@ -20,8 +21,10 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -88,122 +91,219 @@ public class HomeFoundActivity extends AppCompatActivity {
     }
 
 
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//
+////
+//
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.toolbar_menu_search, menu);
+//        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+//        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+//        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+//
+//
+//        // the previous one there getMenuInflater().inflate(R.menu.toolbar_menu_search,menu);
+//        // searchView.setQueryHint("Search Item");
+//        //searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+//        // final SearchView searchView =(SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.toolbar));
+//        //searchView.setSubmitButtonEnabled(true);
+//        //searchView.setSubmitButtonEnabled(true);
+//
+//
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//
+//
+//                String text = query.toLowerCase();
+//
+//                Query firebaseSearchQuery = mDatabase.orderByChild("description").startAt(text).endAt(text + "\uf8ff");
+//                FirebaseRecyclerAdapter <FoundPost,HomeFoundActivity.FounditemViewHolder>
+//                        fbra = new FirebaseRecyclerAdapter<FoundPost, HomeFoundActivity.FounditemViewHolder>(
+//
+//                        FoundPost.class,
+//                        R.layout.foundlayout,
+//                        HomeFoundActivity.FounditemViewHolder.class,
+//                        firebaseSearchQuery
+//                )
+//
+//                {
+//                    //@Override
+//                    protected void populateViewHolder(HomeFoundActivity.FounditemViewHolder viewHolder, FoundPost model, int position) {
+//
+//                        viewHolder.setName(model.getName());
+//                        viewHolder.setEmail(model.getEmail());
+//                        viewHolder.setPhone(model.getPhone());
+//                        viewHolder.setDescription(model.getDescription());
+//                        viewHolder.setTime(model.getTime());
+//                        viewHolder.setImage(getApplication(),model.getImage());
+//
+//
+//
+//
+//                    }
+//                };
+//
+//                FoundItemsList.setAdapter(fbra);
+//
+//
+//
+//
+//
+//                return false;
+//            }
+
+           // @Override
+//            public boolean onQueryTextChange(String newText) {
+//                //SearchText.setText(newText);
+//
+//
+//
+//                String text = newText.toLowerCase();
+//
+//                Query firebaseSearchQuery = mDatabase.orderByChild("description").startAt(text).endAt(text + "\uf8ff");
+//                FirebaseRecyclerAdapter <FoundPost,HomeFoundActivity.FounditemViewHolder>
+//                        fbra = new FirebaseRecyclerAdapter<FoundPost, HomeFoundActivity.FounditemViewHolder>(
+//
+//                        FoundPost.class,
+//                        R.layout.foundlayout,
+//                        HomeFoundActivity.FounditemViewHolder.class,
+//                        firebaseSearchQuery
+//                )
+//
+//                {
+//                    //@Override
+//                    protected void populateViewHolder(HomeFoundActivity.FounditemViewHolder viewHolder, FoundPost model, int position) {
+//
+//                        viewHolder.setName(model.getName());
+//                        viewHolder.setEmail(model.getEmail());
+//                        viewHolder.setPhone(model.getPhone());
+//                        viewHolder.setDescription(model.getDescription());
+//                        viewHolder.setTime(model.getTime());
+//                        viewHolder.setImage(getApplication(),model.getImage());
+//
+//
+//
+//
+////
+//                    }
+//                };
+//
+//                FoundItemsList.setAdapter(fbra);
+//
+//
+//
+//
+//
+//
+//
+//                return false;
+//            }
+//
+//
+//        });
+//
+//
+//        return true;
+//    }
+
+
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+            public boolean onCreateOptionsMenu(Menu menu) {
+                //inflate the menu; this adds items to the action bar if it present
+                getMenuInflater().inflate(R.menu.toolbar_menu_search, menu);
+                MenuItem item = menu.findItem(R.id.action_search);
+                SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        firebaseSearch(query);
+                        return false;
+                    }
 
-//
-
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.toolbar_menu_search, menu);
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-
-
-        // the previous one there getMenuInflater().inflate(R.menu.toolbar_menu_search,menu);
-        // searchView.setQueryHint("Search Item");
-        //searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        // final SearchView searchView =(SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.toolbar));
-        //searchView.setSubmitButtonEnabled(true);
-        //searchView.setSubmitButtonEnabled(true);
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        //Filter as you type
+                        firebaseSearch(newText);
+                        return false;
+                    }
+                });
+                return super.onCreateOptionsMenu(menu);
+            }
 
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
 
+    private void firebaseSearch(String searchText) {
 
-                String text = query.toLowerCase();
+        //convert string entered in SearchView to lowercase
+        //String text = searchText.toLowerCase();
 
-                Query firebaseSearchQuery = mDatabase.orderByChild("description").startAt(text).endAt(text + "\uf8ff");
+        Query firebaseSearchQuery = mDatabase.orderByChild("description").startAt(searchText).endAt(searchText + "\uf8ff");
                 FirebaseRecyclerAdapter <FoundPost,HomeFoundActivity.FounditemViewHolder>
-                        fbra = new FirebaseRecyclerAdapter<FoundPost, HomeFoundActivity.FounditemViewHolder>(
+                       fbra = new FirebaseRecyclerAdapter<FoundPost, HomeFoundActivity.FounditemViewHolder>(
 
                         FoundPost.class,
                         R.layout.foundlayout,
                         HomeFoundActivity.FounditemViewHolder.class,
                         firebaseSearchQuery
-                )
+        )
 
-                {
-                    //@Override
-                    protected void populateViewHolder(HomeFoundActivity.FounditemViewHolder viewHolder, FoundPost model, int position) {
+        {
+            @Override
+            protected void populateViewHolder(HomeFoundActivity.FounditemViewHolder viewHolder, FoundPost model, int position) {
 
-                        viewHolder.setName(model.getName());
-                        viewHolder.setEmail(model.getEmail());
-                        viewHolder.setPhone(model.getPhone());
-                        viewHolder.setDescription(model.getDescription());
-                        viewHolder.setTime(model.getTime());
-                        viewHolder.setImage(getApplication(),model.getImage());
-
-
-
-
-                    }
-                };
-
-                FoundItemsList.setAdapter(fbra);
-
-
-
-
-
-                return false;
+                viewHolder.setName(model.getName());
+                viewHolder.setEmail(model.getEmail());
+                viewHolder.setPhone(model.getPhone());
+                viewHolder.setDescription(model.getDescription());
+                viewHolder.setTime(model.getTime());
+                viewHolder.setImage(getApplication(),model.getImage());
             }
+
 
             @Override
-            public boolean onQueryTextChange(String newText) {
-                //SearchText.setText(newText);
+            public HomeFoundActivity.FounditemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-
-
-                String text = newText.toLowerCase();
-
-                Query firebaseSearchQuery = mDatabase.orderByChild("description").startAt(text).endAt(text + "\uf8ff");
-                FirebaseRecyclerAdapter <FoundPost,HomeFoundActivity.FounditemViewHolder>
-                        fbra = new FirebaseRecyclerAdapter<FoundPost, HomeFoundActivity.FounditemViewHolder>(
-
-                        FoundPost.class,
-                        R.layout.foundlayout,
-                        HomeFoundActivity.FounditemViewHolder.class,
-                        firebaseSearchQuery
-                )
-
-                {
-                    //@Override
-                    protected void populateViewHolder(HomeFoundActivity.FounditemViewHolder viewHolder, FoundPost model, int position) {
-
-                        viewHolder.setName(model.getName());
-                        viewHolder.setEmail(model.getEmail());
-                        viewHolder.setPhone(model.getPhone());
-                        viewHolder.setDescription(model.getDescription());
-                        viewHolder.setTime(model.getTime());
-                        viewHolder.setImage(getApplication(),model.getImage());
-
-
-
+                FounditemViewHolder founditemViewHolder = super.onCreateViewHolder(parent, viewType);
 
 //
-                    }
-                };
+//                TextView postName = findViewById(R.id.namepost);
+//
+//                TextView postemail = findViewById(R.id.emailpost);
+//
+//                TextView postphone = findViewById(R.id.phonepost);
+//
+//                TextView postdescription = findViewById(R.id.descriptionpost);
+//
+//                ImageView postimage = findViewById(R.id.lostimagespreview);
+//
+//                TextView posttime = findViewById(R.id.time);
+//
+//
+//                String name = postName.getText().toString().trim();
+//                String email = postemail.getText().toString().trim();
+//                String phone = postphone.getText().toString().trim();
+//                String description = postdescription.getText().toString();
+//                String time = posttime.getText().toString().trim();
+//                String yourimage = postimage.toString().trim();
 
-                FoundItemsList.setAdapter(fbra);
 
 
-
-
-
-
-
-                return false;
+                return founditemViewHolder;
             }
 
 
-        });
 
+        };
 
-        return true;
+        //set adapter to recyclerview
+        FoundItemsList.setAdapter(fbra);
     }
+
+
+
 
 
 

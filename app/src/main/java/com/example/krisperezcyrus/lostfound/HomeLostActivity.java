@@ -147,43 +147,19 @@ public class HomeLostActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String query) {
 
 
-                String text = query.toLowerCase();
-
-                Query firebaseSearchQuery = mDatabase.orderByChild("description").startAt(text).endAt(text + "\uf8ff");
-                FirebaseRecyclerAdapter <LostPost,HomeLostActivity.LostitemViewHolder>
-                        fbra = new FirebaseRecyclerAdapter<LostPost, HomeLostActivity.LostitemViewHolder>(
-
-                        LostPost.class,
-                        R.layout.lostlayout,
-                        HomeLostActivity.LostitemViewHolder.class,
-                        firebaseSearchQuery
-                )
-
-                {
-                    //@Override
-                    protected void populateViewHolder(HomeLostActivity.LostitemViewHolder viewHolder, LostPost model, int position) {
-
-                        viewHolder.setName(model.getName());
-                        viewHolder.setEmail(model.getEmail());
-                        viewHolder.setPhone(model.getPhone());
-                        viewHolder.setDescription(model.getDescription());
-                        viewHolder.setTime(model.getTime());
-                        viewHolder.setImage(getApplication(),model.getImage());
-
-
-
-
-//                Query Q = mDatabase.child("Lost").orderByChild("description").startAt(newText).endAt("~");
-//                // endAt(newText+"\uf8ff");
-//                FirebaseRecyclerAdapter <LostPost,HomeLostActivity.LostitemViewHolder> fbra = new FirebaseRecyclerAdapter
-//                        <LostPost, HomeLostActivity.LostitemViewHolder>
-//                        (
+//                String text = query.toLowerCase();
+//
+//                Query firebaseSearchQuery = mDatabase.orderByChild("description").startAt(text).endAt(text + "\uf8ff");
+//                FirebaseRecyclerAdapter <LostPost,HomeLostActivity.LostitemViewHolder>
+//                        fbra = new FirebaseRecyclerAdapter<LostPost, HomeLostActivity.LostitemViewHolder>(
 //
 //                        LostPost.class,
 //                        R.layout.lostlayout,
 //                        HomeLostActivity.LostitemViewHolder.class,
-//                        mDatabase
-//                ) {
+//                        firebaseSearchQuery
+//                )
+//
+//                {
 //                    //@Override
 //                    protected void populateViewHolder(HomeLostActivity.LostitemViewHolder viewHolder, LostPost model, int position) {
 //
@@ -193,11 +169,35 @@ public class HomeLostActivity extends AppCompatActivity {
 //                        viewHolder.setDescription(model.getDescription());
 //                        viewHolder.setTime(model.getTime());
 //                        viewHolder.setImage(getApplication(),model.getImage());
-
-                    }
-                };
-
-                LostItemsList.setAdapter(fbra);
+//
+//
+//
+//
+////                Query Q = mDatabase.child("Lost").orderByChild("description").startAt(newText).endAt("~");
+////                // endAt(newText+"\uf8ff");
+////                FirebaseRecyclerAdapter <LostPost,HomeLostActivity.LostitemViewHolder> fbra = new FirebaseRecyclerAdapter
+////                        <LostPost, HomeLostActivity.LostitemViewHolder>
+////                        (
+////
+////                        LostPost.class,
+////                        R.layout.lostlayout,
+////                        HomeLostActivity.LostitemViewHolder.class,
+////                        mDatabase
+////                ) {
+////                    //@Override
+////                    protected void populateViewHolder(HomeLostActivity.LostitemViewHolder viewHolder, LostPost model, int position) {
+////
+////                        viewHolder.setName(model.getName());
+////                        viewHolder.setEmail(model.getEmail());
+////                        viewHolder.setPhone(model.getPhone());
+////                        viewHolder.setDescription(model.getDescription());
+////                        viewHolder.setTime(model.getTime());
+////                        viewHolder.setImage(getApplication(),model.getImage());
+//
+//                    }
+//                };
+//
+//                LostItemsList.setAdapter(fbra);
 
 
 
@@ -212,11 +212,14 @@ public class HomeLostActivity extends AppCompatActivity {
 
 
 
-                String text = newText.toLowerCase();
+               //String text = newText.toLowerCase();
 
-                Query firebaseSearchQuery = mDatabase.orderByChild("description").startAt(text).endAt(text + "\uf8ff");
+                //THIS SEARCH IS WORKING
+                //HAVE TO ADD CATEGORY TO BROADEN IT
+
+                Query firebaseSearchQuery = mDatabase.orderByChild("description").startAt(newText).endAt(newText + "\uf8ff");
                 FirebaseRecyclerAdapter <LostPost,HomeLostActivity.LostitemViewHolder>
-                        fbra = new FirebaseRecyclerAdapter<LostPost, HomeLostActivity.LostitemViewHolder>(
+                        fbras = new FirebaseRecyclerAdapter<LostPost, HomeLostActivity.LostitemViewHolder>(
 
                         LostPost.class,
                         R.layout.lostlayout,
@@ -262,7 +265,7 @@ public class HomeLostActivity extends AppCompatActivity {
                     }
                 };
 
-                LostItemsList.setAdapter(fbra);
+                LostItemsList.setAdapter(fbras);
 
 
 
@@ -443,15 +446,14 @@ public class HomeLostActivity extends AppCompatActivity {
 //        )
 //
 //        {
-//                    //@Override
-//                    protected void populateViewHolder(HomeLostActivity.LostitemViewHolder viewHolder, LostPost model, int position) {
-//
-//                        viewHolder.setName(model.getName());
-//                        viewHolder.setEmail(model.getEmail());
-//                        viewHolder.setPhone(model.getPhone());
-//                        viewHolder.setDescription(model.getDescription());
-//                        viewHolder.setTime(model.getTime());
-//                        viewHolder.setImage(getApplication(),model.getImage());
+//            @Override
+//            protected void populateViewHolder(HomeLostActivity.LostitemViewHolder viewHolder, LostPost model, int position) {
+//                viewHolder.setName(model.getName());
+//                viewHolder.setEmail(model.getEmail());
+//                viewHolder.setPhone(model.getPhone());
+//                viewHolder.setDescription(model.getDescription());
+//                viewHolder.setTime(model.getTime());
+//                viewHolder.setImage(getApplicationContext(), model.getImage());
 //                    }
 //
 //
@@ -460,8 +462,7 @@ public class HomeLostActivity extends AppCompatActivity {
 //
 //                LostitemViewHolder lostitemViewHolder = super.onCreateViewHolder(parent, viewType);
 //
-//
-//                TextView postName = findViewById(R.id.namepost);
+//                    TextView postName = findViewById(R.id.namepost);
 //
 //                TextView postemail = findViewById(R.id.emailpost);
 //
@@ -479,7 +480,7 @@ public class HomeLostActivity extends AppCompatActivity {
 //                 String phone = postphone.getText().toString().trim();
 //                 String description = postdescription.getText().toString();
 //                 String time = posttime.getText().toString().trim();
-//                 String yourimage = postimage.toString().trim();
+//                 String image = postimage.toString().trim();
 //
 //
 //
@@ -493,12 +494,7 @@ public class HomeLostActivity extends AppCompatActivity {
 //        //set adapter to recyclerview
 //        LostItemsList.setAdapter(fbra);
 //    }
-
-
-
-
-
-
+//
 
 
 }

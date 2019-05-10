@@ -70,7 +70,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 app:srcCompat="@drawable/ic_call_black_24dp"
-                android:tint="@color/contactcolor"
+                android:tint="#4e6183"
                 android:onClick="dial_Number"/>
 
 
@@ -81,7 +81,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 app:srcCompat="@drawable/ic_message_black_24dp"
-                android:tint="@color/contactcolor"
+                android:tint="#4e6183"
                 android:onClick="sms_SendMessage"/>
 
             <ImageButton
@@ -91,7 +91,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
                 app:srcCompat="@drawable/ic_email_black_24dp"
-                android:tint="@color/contactcolor"
+                android:tint="#4e6183"
                 android:onClick="sendEmail"/>
 
         </RelativeLayout>
@@ -99,7 +99,7 @@
         <TextView
             android:id="@+id/descriptionpost"
             android:layout_width="match_parent"
-            android:layout_height="37dp"
+            android:layout_height="40dp"
             android:text="@string/description" />
 
 

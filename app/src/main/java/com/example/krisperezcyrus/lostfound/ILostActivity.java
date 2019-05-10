@@ -399,7 +399,7 @@ public class ILostActivity extends AppCompatActivity  {
                 newPost.child("description").setValue(yourdescription);
                 newPost.child("time").setValue(Util_time.getTimestamp());
 
-                finish();
+
 
 
 
@@ -407,13 +407,14 @@ public class ILostActivity extends AppCompatActivity  {
                 Toast.makeText(this, "Item Reported", Toast.LENGTH_LONG).show();
                 startActivity(intent);
 
+
                 editTextname.setText("");
                 editTextemail.setText("");
                 editTextphone.setText("");
                 editTextdescription.setText("");
 
 
-
+                finish();
 
 
             }
