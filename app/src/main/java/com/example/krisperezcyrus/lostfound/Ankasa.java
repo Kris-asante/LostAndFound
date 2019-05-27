@@ -238,9 +238,9 @@ private FirebaseAuth mAuth;
             ft.commit();
 
 
-        }   else if (id == R.id.navigation_myaccount) {
+        }   else if (id == R.id.contact_us) {
             android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.flMain,new MyAccountFragment());
+            ft.replace(R.id.flMain,new ContactUsFragment());
             ft.commit();
 
         }   else if (id == R.id.nav_faq) {

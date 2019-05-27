@@ -5,7 +5,60 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SignInActivity"
-    android:background="@drawable/lost">
+    android:background="@drawable/wallpaper2"
+    android:id="@+id/background">
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/da"
+        android:layout_above="@id/googleBtn"
+        android:layout_alignStart="@id/googleBtn"
+        android:layout_marginBottom="300dp">
+
+        <AutoCompleteTextView
+            android:id="@+id/username"
+            android:layout_width="290dp"
+            android:layout_height="45dp"
+            android:layout_above="@+id/da"
+            android:layout_alignStart="@+id/da"
+            android:background="#B4A4A4"
+            android:hint="Student User Name"
+            android:inputType="text|textShortMessage" />
+
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/daa"
+        android:layout_above="@id/googleBtn"
+        android:layout_alignStart="@id/googleBtn"
+        android:layout_marginBottom="150dp">
+
+        <AutoCompleteTextView
+            android:id="@+id/password"
+            android:layout_width="290dp"
+            android:layout_height="45dp"
+            android:layout_above="@id/googleBtn"
+            android:layout_alignStart="@+id/daa"
+            android:background="#B4A4A4"
+            android:hint="Password"
+            android:inputType="textPassword" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/loginbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="190dp"
+        android:onClick="login"
+        android:text="LOGIN" />
 
 
     <com.google.android.gms.common.SignInButton
@@ -14,6 +67,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="128dp" />
+        android:layout_marginBottom="50dp" />
+
+
+
+
 
 </RelativeLayout>
+
+

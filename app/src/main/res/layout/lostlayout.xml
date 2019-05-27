@@ -59,6 +59,14 @@
             android:layout_height="37dp"
             android:text="@string/your_phone_number" />
 
+        <TextView
+            android:id="@+id/user_location_post"
+            android:layout_width="match_parent"
+            android:layout_height="37dp"
+            android:text="GPS"
+            android:onClick="gpslocation"
+            android:textColorLink="@color/colorRed"/>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -100,7 +108,10 @@
             android:id="@+id/descriptionpost"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:layout_alignParentStart="true"
             android:text="@string/description" />
+
+
 
 
     </LinearLayout>

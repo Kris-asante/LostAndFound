@@ -1,12 +1,16 @@
 package com.example.krisperezcyrus.lostfound;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +39,19 @@ public class SignInActivity extends AppCompatActivity {
     //GoogleSignInApi mGoogleSignInClient;
     GoogleApiClient mGoogleApiClient;
 
+    EditText username;
+    EditText password;
+    Button login;
+
+    String name = "coasante" ;
+    String pass = "1ljsxn2" ;
+
+    String name1 = "kjkusi" ;
+    String pass1 = "1ljsxn2" ;
+
+
+
+
     FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
@@ -61,6 +78,20 @@ public class SignInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_toast);
+
+//
+//        View backgroundImage = findViewById(R.id.background);
+//        Drawable background = backgroundImage.getBackground();
+//        background.setAlpha(80);
+
+
+         username = findViewById(R.id.username);
+
+
+        password = findViewById(R.id.password);
+
+        login = findViewById(R.id.loginbutton);
+
 
         googleBtn = findViewById(R.id.googleBtn);
         mAuth = FirebaseAuth.getInstance();
@@ -158,5 +189,71 @@ public class SignInActivity extends AppCompatActivity {
                         // ...
                     }
                 });
+    }
+
+    public void login(View view) {
+
+
+        boolean cancel = false;
+        View focusView = null;
+
+        final String yourname = username.getText().toString().trim();
+        final String yourname1 = username.getText().toString().trim();
+        final String yourpass = password.getText().toString().trim();
+        final String yourpass1 = password.getText().toString().trim();
+
+
+        if (TextUtils.isEmpty(yourname)) {
+            username.setError("This field is required");
+            focusView = username;
+            cancel = true;
+        }
+
+        if (TextUtils.isEmpty(yourname1)) {
+            username.setError("This field is required");
+            focusView = username;
+            cancel = true;
+        }
+
+        if (TextUtils.isEmpty(yourpass)) {
+            password.setError("This field is required");
+            focusView = password;
+            cancel = true;
+        }
+
+        if (TextUtils.isEmpty(yourpass1)) {
+            password.setError("This field is required");
+            focusView = password;
+            cancel = true;
+        }
+
+        if (cancel){
+            focusView.requestFocus();
+        } else {
+
+
+            if (username.getText().toString().equals(name) && password.getText().toString().equals(pass)) {
+                Intent intent = new Intent(SignInActivity.this,Ankasa.class);
+                startActivity(intent);
+                Toast.makeText(this, "Authentication Verified", Toast.LENGTH_LONG).show();
+
+
+            }
+
+            if (username.getText().toString().equals(name1) && password.getText().toString().equals(pass1)) {
+                Intent intent = new Intent(SignInActivity.this,Ankasa.class);
+                startActivity(intent);
+                Toast.makeText(this, "Authentication Verified", Toast.LENGTH_LONG).show();
+                username.setText("");
+                password.setText("");
+
+            }else {
+
+                Snackbar.make(findViewById(R.id.loginbutton), "Authentication Failed, Wrong Details", Snackbar.LENGTH_LONG).show();
+
+            }
+
+        }
+
     }
 }

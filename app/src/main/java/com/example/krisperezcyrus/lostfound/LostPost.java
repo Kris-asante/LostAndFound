@@ -4,13 +4,13 @@ package com.example.krisperezcyrus.lostfound;
 
 class LostPost {
 
-    private String name,email,phone,description,image,time;
+    private String name,email,phone,description,image,time,gps;
 
     public LostPost(){
 
     }
 
-    public LostPost(String name, String email, String phone, String description, String image,String time){
+    public LostPost(String name, String email, String phone, String description, String image,String time,String gps){
 
         this.name = name;
         this.email =email;
@@ -18,6 +18,7 @@ class LostPost {
         this.description = description;
         this.image = image;
         this.time = time;
+        this.gps = gps;
     }
 
     public String getName(){
@@ -44,6 +45,12 @@ class LostPost {
         return time;
     }
 
+    public String getGps(){
+        return gps;
+    }
+
+
+
 
 
     public void setName(String name) {
@@ -68,6 +75,10 @@ class LostPost {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public void setGps(String gps) {
+        this.gps = gps;
     }
 }
 

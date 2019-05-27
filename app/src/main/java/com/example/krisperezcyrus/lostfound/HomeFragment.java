@@ -91,7 +91,12 @@ public class HomeFragment extends Fragment {
         //fill list screen
         final List<Home_ScreenItem> mList = new ArrayList<>();
 
+        mList.add(new Home_ScreenItem("Before you buy anything, kindly check the platform to see if it is reported as a lost item"));
+        mList.add(new Home_ScreenItem("Check serial number of devices and keep at a safe place. Might come handy"));
         mList.add(new Home_ScreenItem("Keep the IMEI of your device safe.\nDial *#06# on mobile device to check."));
+        mList.add(new Home_ScreenItem("Reported images takes some time to load depending on internet connectivity. Kindly be patient"));
+        mList.add(new Home_ScreenItem("Check VIN/Chassis Number of cars if it has been reported before you buy. They are usally found  on the dashboard of the vehicle or on the driver side door"));
+        mList.add(new Home_ScreenItem("Search is based on keywords. Therefore search with key words in description"));
         mList.add(new Home_ScreenItem("Take pictures of your precious and valuable items and save on your phone"));
         mList.add(new Home_ScreenItem("Before you report an item as lost or found, kindly check if someone has reported it already and contact the person."));
         mList.add(new Home_ScreenItem("Kindly be connected to the internet throughout for ease of usage."));

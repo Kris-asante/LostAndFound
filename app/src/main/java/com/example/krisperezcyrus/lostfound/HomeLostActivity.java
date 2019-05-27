@@ -1,6 +1,7 @@
 package com.example.krisperezcyrus.lostfound;
 
 import android.app.SearchManager;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -26,6 +27,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.squareup.picasso.Picasso;
+
+import java.util.Locale;
 
 public class HomeLostActivity extends AppCompatActivity {
 
@@ -237,6 +240,7 @@ public class HomeLostActivity extends AppCompatActivity {
                         viewHolder.setDescription(model.getDescription());
                         viewHolder.setTime(model.getTime());
                         viewHolder.setImage(getApplication(),model.getImage());
+                        viewHolder.setTime(model.getGps());
 
 
 
@@ -304,6 +308,7 @@ public class HomeLostActivity extends AppCompatActivity {
                 viewHolder.setDescription(model.getDescription());
                 viewHolder.setTime(model.getTime());
                 viewHolder.setImage(getApplication(),model.getImage());
+                viewHolder.setGps(model.getGps());
 
             }
 
@@ -315,8 +320,33 @@ public class HomeLostActivity extends AppCompatActivity {
 
             }
 
+    public void gpslocation(View view) {
 
-            public static class LostitemViewHolder extends RecyclerView.ViewHolder{
+        String uri = String.format(Locale.ENGLISH,  "http://maps.google.com/maps?q= 6.673327,-1.567072");
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+        intent.setPackage("com.google.android.apps.maps");
+        startActivity(intent);
+        try
+        {
+            startActivity(intent);
+        }
+        catch(ActivityNotFoundException ex)
+        {
+            try
+            {
+                Intent unrestrictedIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                startActivity(unrestrictedIntent);
+            }
+            catch(ActivityNotFoundException innerEx)
+            {
+                Toast.makeText(this, "Please install a maps application", Toast.LENGTH_LONG).show();
+            }
+        }
+
+    }
+
+
+    public static class LostitemViewHolder extends RecyclerView.ViewHolder{
 
         public LostitemViewHolder (View itemView){
             super(itemView);
@@ -363,7 +393,14 @@ public class HomeLostActivity extends AppCompatActivity {
             Picasso.with(ctx).load(Image).into(postimage);
         }
 
-    }
+        public void setGps(String gps){
+
+            TextView postgps = itemView.findViewById(R.id.user_location_post);
+            postgps.setText(gps);
+        }
+
+
+            }
 
     public void dial_Number(View view) {
         TextView textView = findViewById(R.id.phonepost);

@@ -69,6 +69,7 @@ public class FAQFragment extends Fragment {
         listDataHeader.add("How Do I Locate My Finder");//C5
         listDataHeader.add("Why Do I Have To Sign In With Google Account");//D6
         listDataHeader.add("Do I Have To Award My Finder");//E7
+        listDataHeader.add("How Best Can I search For An Item");//I8
 
 
 
@@ -113,6 +114,9 @@ public class FAQFragment extends Fragment {
         EEE.add("I would be just nice to show appreciation to someone who helped you locate your lost item." +
                 " To encourage such people to continue with this act of kindness, it is cool to do so :).");
 
+        List<String> III =new ArrayList<>();
+        III.add("Search is based on keywords. Therefore search with key words in description");
+
         listHash.put(listDataHeader.get(0),FFF);
         listHash.put(listDataHeader.get(1),GGG);
         listHash.put(listDataHeader.get(2),AAA);
@@ -121,6 +125,7 @@ public class FAQFragment extends Fragment {
         listHash.put(listDataHeader.get(5),CCC);
         listHash.put(listDataHeader.get(6),DDD);
         listHash.put(listDataHeader.get(7),EEE);
+        listHash.put(listDataHeader.get(8),III);
 
     }
 

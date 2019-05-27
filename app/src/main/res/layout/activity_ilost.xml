@@ -9,6 +9,28 @@
     android:background="@color/bckreport">
 
 
+    <!--<android.support.design.widget.TextInputLayout-->
+        <!--android:id="@+id/da_name"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@id/ilosttextView"-->
+        <!--android:layout_alignBottom="@id/ilosttextView"-->
+        <!--&gt;-->
+      <!---->
+
+        <!--<AutoCompleteTextView-->
+            <!--android:id="@+id/name"-->
+            <!--android:layout_width="288dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@id/ilosttextView"-->
+            <!--android:layout_alignBottom="@id/ilosttextView"-->
+
+            <!--android:hint="@string/your_name"-->
+            <!--android:inputType="text|textShortMessage" />-->
+
+
+    <!--</android.support.design.widget.TextInputLayout>-->
+
     <EditText
         android:id="@+id/name"
         android:layout_width="288dp"
@@ -77,7 +99,7 @@
             android:layout_alignBottom="@+id/phone"
             android:hint="@string/description"
             android:inputType="textAutoCorrect|textMultiLine|textLongMessage|textFilter|textCapSentences"
-            android:maxLength="150" />
+            android:maxLength="100" />
 
 
     </android.support.design.widget.TextInputLayout>
@@ -129,7 +151,8 @@
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/name"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="28dp"
+        android:layout_marginEnd="-10dp"
+        android:layout_marginBottom="10dp"
         android:onClick="ilostbuttonClicked"
         android:text="@string/report_lost" />
 
@@ -142,6 +165,28 @@
         android:layout_height="wrap_content"
         android:id="@+id/noteBody"/>
 
+    <Button
+        android:id="@+id/fetch_location"
+        android:layout_width="108dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ilostreportbtn"
+        android:layout_alignStart="@+id/ilostreportbtn"
+        android:layout_alignEnd="@+id/ilostreportbtn"
+        android:layout_alignRight="@+id/ilostreportbtn"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="15dp"
+        android:text="GET GPS" />
+
+    <TextView
+        android:id="@+id/user_location"
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:layout_above="@+id/camerabutton"
+        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="-1dp"
+        android:text="GPS LOCATION"
+        android:onClick="gps_location"/>
 
 
 </RelativeLayout>

@@ -13,12 +13,15 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.Continuation;
@@ -57,6 +60,9 @@ public class IFoundActivity extends AppCompatActivity {
 //end
 
 
+    private TextView mCount;
+
+
     /*private StorageReference storageReference;
       private ImageView imageView;
       Uri uri;
@@ -82,7 +88,7 @@ public class IFoundActivity extends AppCompatActivity {
         //linearLayoutManager.setStackFromEnd(true);
 
 
-
+        mCount = findViewById(R.id.title_counter);
 
 
 
@@ -102,6 +108,30 @@ public class IFoundActivity extends AppCompatActivity {
        /* String image = getIntent().getStringExtra("image_uri");
         imageUri = Uri.parse(image);
         imageview.setImageURI(imageUri);*/
+
+
+
+
+        //for counting derscription characters
+        editTextdescription.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String text = editTextdescription.getText().toString();
+                mCount.setText(text.length()+"/100");
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
 
 
     }
@@ -163,9 +193,23 @@ public class IFoundActivity extends AppCompatActivity {
             focusView = editTextphone;
             cancel = true;
         }
+
+        if (editTextphone.getText().length() <10){
+            editTextphone.setError("Digits Of Number Not Up To 10");
+            focusView = editTextphone;
+            cancel = true;
+
+        }
         if (TextUtils.isEmpty(youremail)) {
             editTextemail.setError("This field is required");
             focusView = editTextemail;
+            cancel = true;
+        }
+
+
+        if (TextUtils.isEmpty(yourdescription)) {
+            editTextdescription.setError("This field is required");
+            focusView = editTextdescription;
             cancel = true;
         }
 
@@ -280,7 +324,7 @@ public class IFoundActivity extends AppCompatActivity {
                 // newPost.child("image").setValue(downloadurl.toString());
 
 
-                finish();
+
                 // }
 
 
@@ -290,6 +334,7 @@ public class IFoundActivity extends AppCompatActivity {
                 Toast.makeText(this, "Item Reported", Toast.LENGTH_LONG).show();
                 startActivity(intent);
 
+                finish();
             }
         }
 
