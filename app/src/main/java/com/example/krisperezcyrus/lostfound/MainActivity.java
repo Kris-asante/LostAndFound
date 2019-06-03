@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.FirebaseMessagingService;
 
 
 //import static com.example.krisperezcyrus.lostfound.R.id.startButton;
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity /*implements View.OnClickLis
 
         Log.d("action","In onCreate");
 
+        FirebaseMessaging.getInstance().subscribeToTopic("your_topic");
 
 
     }

@@ -54,13 +54,13 @@
 
     <string name="title_activity_home_lost">Lost Items</string>
     <string name="title_activity_home_found">Found Items</string>
-    <string name="_2018_KrisyMay_project_all_rights_reserved">2018 KrisyMay-PROJECT.All rights reserved</string>
+    <string name="_2018_KrisyMay_project_all_rights_reserved">2019 -PROJECT.All rights reserved</string>
     <string name="aboutApp">
 
 
 Globally there are 610 million people searching for something or someone lost. 73% of lost items never return. 20% of lost items is actually stolen. 25% of lost cats and 7% of lost dogs never return to their owner.
 
-If you ever lost something (who hasn’t?) you know how frustrating it can be.. Where did I loose it? Did anyone find it? How can I find him/her? What would I do if I found something? Even with all the quick share possibilities via social media it’s still frustrating. So wouldn’t it be awesome if there was one place where you know people would go to report lost and found? We are creating that place!
+If you ever lost something (who hasn’t?) you know how frustrating it can be. Where did I loose it? Did anyone find it? How can I find him/her? What would I do if I found something? Even with all the quick share possibilities via social media it’s still frustrating. So wouldn’t it be awesome if there was one place where you know people would go to report lost and found? We are creating that place!
 
 How frustrating it is when you lose something, especially when it has emotional value to you. Like that jewelry you got from your late grandmother. Or when your beloved pet goes missing? It’s invaluable. However, it’s 100% certain that whenever you lose something somebody will find it. It simply cannot dissolve.
 
@@ -117,6 +117,8 @@ We have a vision on becoming the largest Lost &amp; Found application by helping
     <string name="title_activity_camera">CameraActivity</string>
     <string name="_0_100">0/100</string>
     <string name="why_lost_amp_found"><![CDATA[Why Lost&Found]]></string>
+    <string name="welcome_to_lost_amp_found"><![CDATA[Welcome To Lost&Found]]></string>
+    <string name="kind_login_with_school_details">Kindly Login With School Details</string>
 
 
 </resources>

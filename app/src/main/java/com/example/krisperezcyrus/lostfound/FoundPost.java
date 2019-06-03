@@ -2,13 +2,13 @@ package com.example.krisperezcyrus.lostfound;
 
 public class FoundPost {
 
-    private String name,email,phone,image,description,time;
+    private String name,email,phone,image,description,time,gps;
 
     public FoundPost(){
 
     }
 
-    public FoundPost(String name, String email, String phone, String description,String image,String time)
+    public FoundPost(String name, String email, String phone, String description,String image,String time,String gps)
     {
 
         this.name = name;
@@ -17,6 +17,7 @@ public class FoundPost {
         this.description = description;
         this.time = time;
         this.image = image;
+        this.gps = gps;
 
     }
 
@@ -44,6 +45,12 @@ public class FoundPost {
         return image;
     }
 
+
+    public String getGps(){
+        return gps;
+    }
+
+
     public void setName(String name) {
         this.name = name;
     }
@@ -66,6 +73,10 @@ public class FoundPost {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public void setGps(String gps) {
+        this.gps = gps;
     }
 }
 

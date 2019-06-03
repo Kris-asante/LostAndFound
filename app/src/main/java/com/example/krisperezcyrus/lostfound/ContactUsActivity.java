@@ -15,6 +15,7 @@ public class ContactUsActivity extends AppCompatActivity {
 
 
     private EditText editTextcontactus;
+    private EditText editTextcontactusemail;
     private DatabaseReference databaseReference;
 
 
@@ -26,6 +27,7 @@ public class ContactUsActivity extends AppCompatActivity {
 
 
         editTextcontactus =  findViewById(R.id.contact_us);
+        editTextcontactusemail =  findViewById(R.id.contact_us_email);
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Feedback");
     }
 
@@ -38,11 +40,17 @@ public class ContactUsActivity extends AppCompatActivity {
         View focusView = null;
 
         final String yourfeedbacktxt = editTextcontactus.getText().toString().trim();
+        final String yourfeedbacktxtemail = editTextcontactusemail.getText().toString().trim();
 
 
         if (TextUtils.isEmpty(yourfeedbacktxt)) {
             editTextcontactus.setError("This field is required");
             focusView = editTextcontactus;
+            cancel = true;
+        }
+        if (TextUtils.isEmpty(yourfeedbacktxtemail)) {
+            editTextcontactusemail.setError("This field is required");
+            focusView = editTextcontactusemail;
             cancel = true;
         }
 
@@ -56,6 +64,7 @@ public class ContactUsActivity extends AppCompatActivity {
             newPost.child("Feedback").setValue(yourfeedbacktxt);
 
             editTextcontactus.setText("");
+            editTextcontactusemail.setText("");
 
 
             finish();

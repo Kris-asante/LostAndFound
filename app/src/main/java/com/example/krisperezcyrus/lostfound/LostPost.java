@@ -1,16 +1,17 @@
 package com.example.krisperezcyrus.lostfound;
 
 
+import com.google.firebase.database.Exclude;
 
 class LostPost {
 
-    private String name,email,phone,description,image,time,gps;
+    private String name,email,phone,description,image,time,gps,mkey;
 
     public LostPost(){
 
     }
 
-    public LostPost(String name, String email, String phone, String description, String image,String time,String gps){
+    public LostPost(String name, String email, String phone, String description, String image,String time,String gps,String mkey){
 
         this.name = name;
         this.email =email;
@@ -50,6 +51,12 @@ class LostPost {
     }
 
 
+//    @Exclude
+//    public String getKey(){
+//        return mkey;
+//    }
+
+
 
 
 
@@ -80,5 +87,11 @@ class LostPost {
     public void setGps(String gps) {
         this.gps = gps;
     }
+
+
+//    @Exclude //not you didn't add THIS to the statement
+//    public void setKey(String key) {
+//        mkey = key;
+//    }
 }
 

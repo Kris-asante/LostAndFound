@@ -42,18 +42,21 @@
 
 
         <TextView
+            android:textSize="16dp"
             android:id="@+id/namepost"
             android:layout_width="match_parent"
             android:layout_height="37dp"
             android:text="@string/your_name" />
 
         <TextView
+            android:textSize="16dp"
             android:id="@+id/emailpost"
             android:layout_width="match_parent"
             android:layout_height="37dp"
             android:text="@string/your_email" />
 
         <TextView
+            android:textSize="16dp"
             android:id="@+id/phonepost"
             android:layout_width="match_parent"
             android:layout_height="37dp"
@@ -64,8 +67,9 @@
             android:layout_width="match_parent"
             android:layout_height="37dp"
             android:text="GPS"
+           android:textStyle="bold"
             android:onClick="gpslocation"
-            android:textColorLink="@color/colorRed"/>
+            android:textColor="@color/colorRed"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -88,23 +92,43 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                app:srcCompat="@drawable/ic_message_black_24dp"
+                android:layout_marginStart="39dp"
+                android:layout_marginTop="2dp"
+                android:layout_toEndOf="@+id/phoneicon"
+                android:onClick="sms_SendMessage"
                 android:tint="#4e6183"
-                android:onClick="sms_SendMessage"/>
+                app:srcCompat="@drawable/ic_message_black_24dp" />
+
 
             <ImageButton
                 android:id="@+id/phoneemail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
-                app:srcCompat="@drawable/ic_email_black_24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="90dp"
+                android:onClick="sendEmail"
                 android:tint="#4e6183"
-                android:onClick="sendEmail"/>
+                app:srcCompat="@drawable/ic_email_black_24dp" />
+
+            <ImageButton
+                android:id="@+id/deleteicon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="15dp"
+                android:onClick="delete_icon"
+                android:tint="#4e6183"
+                app:srcCompat="@drawable/ic_delete_black_24dp" />
+
 
         </RelativeLayout>
 
         <TextView
+            android:textSize="16dp"
             android:id="@+id/descriptionpost"
             android:layout_width="match_parent"
             android:layout_height="40dp"

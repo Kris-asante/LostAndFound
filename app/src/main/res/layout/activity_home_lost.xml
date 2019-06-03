@@ -29,10 +29,11 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/lostItemsList"
         android:layout_width="match_parent"
-        android:layout_height="520dp"
-        android:layout_alignParentBottom="true"
+        android:layout_height="603dp"
         android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginStart="0dp"
+        android:layout_marginBottom="5dp"
         android:background="@drawable/wallpaper3">
 
 

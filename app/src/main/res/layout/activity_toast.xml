@@ -22,7 +22,7 @@
             android:layout_height="45dp"
             android:layout_above="@+id/da"
             android:layout_alignStart="@+id/da"
-            android:background="#B4A4A4"
+            android:background="#68CEDA"
             android:hint="Student User Name"
             android:inputType="text|textShortMessage" />
 
@@ -43,7 +43,7 @@
             android:layout_height="45dp"
             android:layout_above="@id/googleBtn"
             android:layout_alignStart="@+id/daa"
-            android:background="#B4A4A4"
+            android:background="#68CEDA"
             android:hint="Password"
             android:inputType="textPassword" />
 
@@ -59,6 +59,34 @@
         android:layout_marginBottom="190dp"
         android:onClick="login"
         android:text="LOGIN" />
+
+    <TextView
+        android:layout_width="363dp"
+        android:layout_height="45dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="569dp"
+        android:text="@string/welcome_to_lost_amp_found"
+        android:textColor="#ffffff"
+        android:textSize="30dp" />
+
+    <TextView
+        android:layout_width="306dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="68dp"
+        android:layout_marginEnd="37dp"
+        android:layout_marginBottom="508dp"
+        android:text="@string/kind_login_with_school_details"
+        android:textColor="#ffffff"
+        android:textSize="18dp" />
 
 
     <com.google.android.gms.common.SignInButton

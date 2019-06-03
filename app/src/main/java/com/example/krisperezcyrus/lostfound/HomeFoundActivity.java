@@ -2,12 +2,16 @@ package com.example.krisperezcyrus.lostfound;
 
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
+import android.app.ProgressDialog;
 import android.app.SearchManager;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -42,8 +46,12 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.Locale;
+
 
 public class HomeFoundActivity extends AppCompatActivity {
+
+    //AsyncTask myAsyncTask;
 
     LinearLayoutManager mLayoutManager;
 
@@ -219,13 +227,17 @@ public class HomeFoundActivity extends AppCompatActivity {
                 searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                     @Override
                     public boolean onQueryTextSubmit(String query) {
-                        firebaseSearch(query);
+
+                        //firebaseSearchs(query);
+                        firebaseSearchs(query);
+
                         return false;
                     }
 
                     @Override
                     public boolean onQueryTextChange(String newText) {
                         //Filter as you type
+                        //firebaseSearch(newText);
                         firebaseSearch(newText);
                         return false;
                     }
@@ -237,10 +249,12 @@ public class HomeFoundActivity extends AppCompatActivity {
 
     private void firebaseSearch(String searchText) {
 
+        String query = searchText.toLowerCase();
+
         //convert string entered in SearchView to lowercase
         //String text = searchText.toLowerCase();
 
-        Query firebaseSearchQuery = mDatabase.orderByChild("description").startAt(searchText).endAt(searchText + "\uf8ff");
+        Query firebaseSearchQuery = mDatabase.orderByChild("search").startAt(query).endAt(query + "\uf8ff");
                 FirebaseRecyclerAdapter <FoundPost,HomeFoundActivity.FounditemViewHolder>
                        fbra = new FirebaseRecyclerAdapter<FoundPost, HomeFoundActivity.FounditemViewHolder>(
 
@@ -260,6 +274,7 @@ public class HomeFoundActivity extends AppCompatActivity {
                 viewHolder.setDescription(model.getDescription());
                 viewHolder.setTime(model.getTime());
                 viewHolder.setImage(getApplication(),model.getImage());
+                viewHolder.setTime(model.getGps());
             }
 
 
@@ -307,6 +322,63 @@ public class HomeFoundActivity extends AppCompatActivity {
 
 
 
+
+
+    private void firebaseSearchs(String searchText) {
+
+        String query = searchText.toLowerCase();
+
+        //convert string entered in SearchView to lowercase
+        //String text = searchText.toLowerCase();
+
+        Query firebaseSearchQuerys = mDatabase.orderByChild("searchs").startAt(query).endAt(query + "\uf8ff");
+        FirebaseRecyclerAdapter <FoundPost,HomeFoundActivity.FounditemViewHolder>
+                fbra = new FirebaseRecyclerAdapter<FoundPost, HomeFoundActivity.FounditemViewHolder>(
+
+                FoundPost.class,
+                R.layout.foundlayout,
+                HomeFoundActivity.FounditemViewHolder.class,
+                firebaseSearchQuerys
+        )
+
+        {
+            @Override
+            protected void populateViewHolder(HomeFoundActivity.FounditemViewHolder viewHolder, FoundPost model, int position) {
+
+                viewHolder.setName(model.getName());
+                viewHolder.setEmail(model.getEmail());
+                viewHolder.setPhone(model.getPhone());
+                viewHolder.setDescription(model.getDescription());
+                viewHolder.setTime(model.getTime());
+                viewHolder.setImage(getApplication(),model.getImage());
+                viewHolder.setTime(model.getGps());
+            }
+
+
+            @Override
+            public HomeFoundActivity.FounditemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+                FounditemViewHolder founditemViewHolder = super.onCreateViewHolder(parent, viewType);
+
+
+                return founditemViewHolder;
+            }
+
+
+
+        };
+
+        //set adapter to recyclerview
+        FoundItemsList.setAdapter(fbra);
+    }
+
+
+
+
+
+
+
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -336,6 +408,34 @@ public class HomeFoundActivity extends AppCompatActivity {
         FoundItemsList.setAdapter(fbra);
 
     }
+
+
+
+    public void gpslocation(View view) {
+
+        String uri = String.format(Locale.ENGLISH,  "http://maps.google.com/maps?q= 6.673327,-1.567072");
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+        intent.setPackage("com.google.android.apps.maps");
+        startActivity(intent);
+        try
+        {
+            startActivity(intent);
+        }
+        catch(ActivityNotFoundException ex)
+        {
+            try
+            {
+                Intent unrestrictedIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                startActivity(unrestrictedIntent);
+            }
+            catch(ActivityNotFoundException innerEx)
+            {
+                Toast.makeText(this, "Please install a maps application", Toast.LENGTH_LONG).show();
+            }
+        }
+
+    }
+
 
     public static class FounditemViewHolder extends RecyclerView.ViewHolder {
 
@@ -384,6 +484,12 @@ public class HomeFoundActivity extends AppCompatActivity {
             postdescription.setText(description);
         }
 
+
+        public void setGps(String gps){
+
+            TextView postgps = itemView.findViewById(R.id.user_location_post);
+            postgps.setText(gps);
+        }
 
     }
 
@@ -448,6 +554,39 @@ public class HomeFoundActivity extends AppCompatActivity {
         Toast.makeText(this," Select Email Client",Toast.LENGTH_LONG).show();
     }
 
+
+//    public  class YourAsyncTask extends AsyncTask<Void, Void, Void> {
+//        private ProgressDialog dialog;
+//
+//        public YourAsyncTask(HomeFoundActivity activity) {
+//            dialog = new ProgressDialog(activity);
+//        }
+//
+//
+//        @Override
+//        protected void onPreExecute() {
+//            dialog.setMessage("Checking Permission.");
+//            dialog.show();
+//        }
+//        @Override
+//        protected Void doInBackground(Void... args) {
+//            Snackbar.make(findViewById(R.id.deleteicon), "Check Internet Connectivity", Snackbar.LENGTH_LONG).show();
+//            return null;
+//        }
+//        @Override
+//        protected void onPostExecute(Void result) {
+//            // do UI work here
+//            if (dialog.isShowing()) {
+//                dialog.dismiss();
+//            }
+//        }
+//    }
+
+
+//    public void delete_icon (){
+//
+//
+//   }
 
 
 }

@@ -13,6 +13,11 @@
             android:icon="@drawable/ic_report_black_24dp"
             android:title="@string/report_item" />
 
+        <item
+            android:id="@+id/my_report"
+            android:icon="@drawable/ic_report_problem_black_24dp"
+            android:title="My Report" />
+
         <!--<item-->
             <!--android:id="@+id/navigation_myaccount"-->
             <!--android:icon="@drawable/ic_account_circle_black_24dp"-->

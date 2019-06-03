@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -52,6 +53,11 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import org.json.JSONObject;
+
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -377,7 +383,7 @@ public class ILostActivity extends AppCompatActivity  {
             cancel = true;
         }
 
-        if (editTextphone.getText().length() <10){
+        if (editTextphone.getText().length() <10 ){
             editTextphone.setError("Digits of number not up to 10");
             focusView = editTextphone;
             cancel = true;
@@ -457,6 +463,9 @@ public class ILostActivity extends AppCompatActivity  {
                             //NOT QUIET SURE
                             newPost.child("time").setValue(Util_time.getTimestamp());
 
+
+                            new PushNotification().execute();
+
                             finish();
 
 
@@ -535,7 +544,7 @@ public class ILostActivity extends AppCompatActivity  {
                 newPost.child("gps").setValue(yourgps);
 
 
-
+                new PushNotification().execute();
 
 
                 Intent intent = new Intent(ILostActivity.this, HomeLostActivity.class);
@@ -547,6 +556,9 @@ public class ILostActivity extends AppCompatActivity  {
                 editTextemail.setText("");
                 editTextphone.setText("");
                 editTextdescription.setText("");
+
+
+
 
 
                 finish();
@@ -605,7 +617,7 @@ public class ILostActivity extends AppCompatActivity  {
         return m.matches();
     }
     public static boolean isValidName(String name) {
-        String ePattern ="^[A-Za-z- -A-Za-z]+$";
+        String ePattern ="^[A-Za-z - A-Za-z]+$";
         java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
         java.util.regex.Matcher m = p.matcher(name);
         return m.matches();
@@ -645,4 +657,63 @@ public class ILostActivity extends AppCompatActivity  {
         }
 
     }
+
+
+
+    public class PushNotification extends AsyncTask<Void,Void,Void > {
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            try {
+
+                URL url = new URL("https://fcm.googleapis.com/fcm/send");
+
+                HttpURLConnection conn =  (HttpURLConnection) url.openConnection();
+
+                conn.setUseCaches(false);
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Authorization", "key=AIzaSyDgdzjmis2Sv3YGfOPpWuQ_CsUKyrEidMU");
+                conn.setRequestProperty("Content-Type", "application/json");
+
+                JSONObject json = new JSONObject();
+
+
+                json.put("to", "/topics/" + "your_topic");
+
+
+
+
+
+
+                JSONObject info = new JSONObject();
+                info.put("title", "Item Reported");
+                info.put("body", "Kindly Check The Item Reported As Lost To Help Someone");
+                json.put("notification",info);
+
+
+
+
+
+
+                OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+                wr.write(json.toString());
+                wr.flush();
+                conn.getInputStream();
+            } catch (Exception e)
+            {
+                Log.d("Error", "" + e + ":" + e.getMessage());
+            }
+            return null;
+        }
+    }
+
+
+
+
+
+
+
 }

@@ -47,7 +47,7 @@ public class SignInActivity extends AppCompatActivity {
     String pass = "1ljsxn2" ;
 
     String name1 = "kjkusi" ;
-    String pass1 = "1ljsxn2" ;
+    String pass1 = "7mvuwb8" ;
 
 
 
@@ -236,7 +236,8 @@ public class SignInActivity extends AppCompatActivity {
                 Intent intent = new Intent(SignInActivity.this,Ankasa.class);
                 startActivity(intent);
                 Toast.makeText(this, "Authentication Verified", Toast.LENGTH_LONG).show();
-
+                username.setText("");
+                password.setText("");
 
             }
 

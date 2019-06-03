@@ -20,6 +20,7 @@ public class ContactUsFragment  extends Fragment {
 
 
     private EditText editTextcontactus;
+    private EditText editTextcontactusemail;
     private DatabaseReference databaseReference;
 
 
@@ -43,6 +44,7 @@ public class ContactUsFragment  extends Fragment {
 
 
         editTextcontactus =  view.findViewById(R.id.contact_us);
+        editTextcontactus =  view.findViewById(R.id.contact_us_email);
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Feedback");
 
         view.findViewById(R.id.contactusbtn).setOnClickListener(new View.OnClickListener() {
@@ -55,11 +57,17 @@ public class ContactUsFragment  extends Fragment {
                 View focusView = null;
 
                 final String yourfeedbacktxt = editTextcontactus.getText().toString().trim();
+                final String yourfeedbacktxtemail = editTextcontactusemail.getText().toString().trim();
 
 
                 if (TextUtils.isEmpty(yourfeedbacktxt)) {
                     editTextcontactus.setError("This field is required");
                     focusView = editTextcontactus;
+                    cancel = true;
+                }
+                if (TextUtils.isEmpty(yourfeedbacktxtemail)) {
+                    editTextcontactusemail.setError("This field is required");
+                    focusView = editTextcontactusemail;
                     cancel = true;
                 }
 
@@ -73,6 +81,7 @@ public class ContactUsFragment  extends Fragment {
                     newPost.child("Feedback").setValue(yourfeedbacktxt);
 
                     editTextcontactus.setText("");
+                    editTextcontactusemail.setText("");
 
 
                     getActivity().finish();

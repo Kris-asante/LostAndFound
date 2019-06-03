@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DataActivity"
+    android:background="#ffffff">
+
+
+    <TextView
+        android:textAlignment="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="59dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="485dp"
+        android:text="STATISTICS "
+        android:textSize="30dp" />
+
+
+    <TextView
+        android:textAlignment="center"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="45dp"
+        android:layout_marginEnd="46dp"
+        android:layout_marginBottom="411dp"
+        android:text="Students Registered "
+        android:textColor="@color/colorRed"
+        android:textSize="20dp" />
+
+    <TextView
+        android:layout_width="84dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="164dp"
+        android:layout_marginEnd="163dp"
+        android:layout_marginBottom="374dp"
+        android:text="11"
+        android:textAlignment="center"
+        android:textColor="@color/colorRed"
+        android:textSize="25dp">
+
+    </TextView>
+
+
+    <TextView
+        android:layout_width="286dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="73dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginBottom="325dp"
+        android:text="Number Of Lost Item"
+        android:textAlignment="center"
+        android:textColor="#FF0F59DA"
+        android:textSize="20dp" />
+
+    <TextView
+        android:textColor="#FF0F59DA"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="165dp"
+        android:layout_marginEnd="185dp"
+        android:layout_marginBottom="280dp"
+        android:text="8"
+        android:textAlignment="center"
+        android:textSize="25dp" />
+
+    <TextView
+        android:layout_width="282dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="75dp"
+        android:layout_marginEnd="54dp"
+        android:layout_marginBottom="222dp"
+        android:text="Number Of Found Item"
+        android:textAlignment="center"
+        android:textColor="#349e1d"
+        android:textSize="20dp" />
+
+
+    <TextView
+        android:textColor="#349e1d"
+        android:layout_width="95dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="161dp"
+        android:layout_marginEnd="155dp"
+        android:layout_marginBottom="168dp"
+        android:text="6"
+        android:textAlignment="center"
+        android:textSize="25dp" />
+
+    <TextView
+        android:layout_width="269dp"
+        android:layout_height="62dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="68dp"
+        android:layout_marginEnd="74dp"
+        android:layout_marginBottom="67dp"
+        android:text="Total Reports"
+        android:textAlignment="center"
+        android:textColor="#FFFF5722"
+        android:textSize="20dp" />
+
+    <TextView
+        android:textColor="#FFFF5722"
+        android:layout_width="122dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="155dp"
+        android:layout_marginEnd="134dp"
+        android:layout_marginBottom="29dp"
+        android:text="14"
+        android:textAlignment="center"
+        android:textSize="25dp" />
+
+</RelativeLayout>
+
+
+
+
+
+

@@ -210,6 +210,14 @@ private FirebaseAuth mAuth;
 
             return false;
 
+
+            }else if (id == R.id.data){
+
+            startActivity(new Intent(Ankasa.this,DataActivity.class));
+
+
+
+
        }else if (id == R.id.contact_us){
 
             startActivity(new Intent(Ankasa.this,ContactUsActivity.class));
@@ -235,6 +243,12 @@ private FirebaseAuth mAuth;
         }   else if (id == R.id.navigation_ReportItem) {
             android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.flMain,new ReportItemFragment());
+            ft.commit();
+
+
+        }   else if (id == R.id.my_report) {
+            android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.flMain,new MyReportFragment());
             ft.commit();
 
 

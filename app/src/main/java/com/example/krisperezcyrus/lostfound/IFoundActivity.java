@@ -1,15 +1,24 @@
 package com.example.krisperezcyrus.lostfound;
 
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Location;
 import android.net.Uri;
 
 
+import android.os.AsyncTask;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,6 +33,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -36,10 +47,24 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Locale;
 
 
 public class IFoundActivity extends AppCompatActivity {
+
+    private static final int MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 3;
+    //for GPS
+    Button fetch;
+    TextView user_location;
+    private FusedLocationProviderClient fusedLocationClient;
+    Double latitude;
+    Double longitude;
 
 
     private EditText editTextname,editTextemail,editTextphone,editTextdescription;
@@ -55,7 +80,7 @@ public class IFoundActivity extends AppCompatActivity {
     byte[] image;
     private Button cameraBtn;
     private ImageView imageview;
-    private static final int CAMERA_REQUEST_CODE = 3;
+    private static final int CAMERA_REQUEST_CODE = 4;
     private StorageReference storageReference;
 //end
 
@@ -73,6 +98,26 @@ public class IFoundActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ifound);
+
+
+        //for gps
+        user_location =  findViewById(R.id.user_locations);
+        fetch =  findViewById(R.id.fetch_locations);
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+
+        fetch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                fetchLocation();
+
+
+
+            }
+        });
+
+
 
         editTextname =  findViewById(R.id.name);
         editTextemail =  findViewById(R.id.email);
@@ -154,6 +199,7 @@ public class IFoundActivity extends AppCompatActivity {
         final String youremail = editTextemail.getText().toString().trim();
         final String yourphone = editTextphone.getText().toString().trim();
         final String yourdescription = editTextdescription.getText().toString().trim();
+        final String yourgps = user_location.getText().toString().trim();
 
 
 /*
@@ -285,9 +331,11 @@ public class IFoundActivity extends AppCompatActivity {
                             newPost.child("description").setValue(yourdescription);
                             newPost.child("time").setValue(Util_time.getTimestamp());
                             newPost.child("image").setValue(downloadurl);
+                            newPost.child("gps").setValue(yourgps);
 
                             //NOT QUIET SURE
                             newPost.child("time").setValue(Util_time.getTimestamp());
+                            new PushNotification().execute();
 
                             finish();
 
@@ -321,9 +369,10 @@ public class IFoundActivity extends AppCompatActivity {
                 newPost.child("phone").setValue(yourphone);
                 newPost.child("description").setValue(yourdescription);
                 newPost.child("time").setValue(Util_time.getTimestamp());
+                newPost.child("gps").setValue(yourgps);
                 // newPost.child("image").setValue(downloadurl.toString());
 
-
+                new PushNotification().execute();
 
                 // }
 
@@ -336,6 +385,9 @@ public class IFoundActivity extends AppCompatActivity {
 
                 finish();
             }
+
+            Intent intent = new Intent(IFoundActivity.this,HomeFoundActivity.class);
+            startActivity(intent);
         }
 
     }
@@ -385,7 +437,7 @@ public class IFoundActivity extends AppCompatActivity {
     }
 
     public static boolean isValidName(String name) {
-        String ePattern ="^[A-Za-z- -A-Za-z]+$";
+        String ePattern ="^[A-Za-z - A-Za-z]+$";
         java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
         java.util.regex.Matcher m = p.matcher(name);
         return m.matches();
@@ -441,6 +493,169 @@ public class IFoundActivity extends AppCompatActivity {
         return data;
     }
 
+
+    public void gps_location(View view) {
+
+        //String uri = "http://maps.google.com/maps?q=loc:%f,%f", latitude,longitude);
+        // String uri = String.format(Locale.ENGLISH,  "http://maps.google.com/maps?q=loc:%f,%f", 28.43242324,77.8977673);
+        String uri = String.format(Locale.ENGLISH,  "http://maps.google.com/maps?q= 6.673327,-1.567072");
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+        intent.setPackage("com.google.android.apps.maps");
+        startActivity(intent);
+        try
+        {
+            startActivity(intent);
+        }
+        catch(ActivityNotFoundException ex)
+        {
+            try
+            {
+                Intent unrestrictedIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                startActivity(unrestrictedIntent);
+            }
+            catch(ActivityNotFoundException innerEx)
+            {
+                Toast.makeText(this, "Please install a maps application", Toast.LENGTH_LONG).show();
+            }
+        }
+
+    }
+
+
+
+    private void fetchLocation() {
+
+        // Here, thisActivity is the current activity
+        if (ContextCompat.checkSelfPermission(IFoundActivity.this,
+                Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Permission is not granted
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(IFoundActivity.this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+
+                new AlertDialog.Builder(this)
+                        .setTitle("Required Location Permission")
+                        .setMessage("You have to give this permission to access the feature")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                ActivityCompat.requestPermissions(IFoundActivity.this,
+                                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                                        MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION);
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .create()
+                        .show();
+
+            } else {
+                // No explanation needed; request the permission
+                ActivityCompat.requestPermissions(IFoundActivity.this,
+                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        } else {
+            // Permission has already been granted
+
+            fusedLocationClient.getLastLocation()
+                    .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+                            // Got last known location. In some rare situations this can be null.
+                            if (location != null) {
+                                // Logic to handle location object
+
+                                Double latitude = location.getLatitude();
+                                Double longitude = location.getLongitude();
+
+                                user_location.setText("Latitude = "+latitude + "\nLongitude = " +longitude);
+                            }
+                        }
+                    });
+
+
+        }
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode ==  MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION){
+
+            if (grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED) {
+
+            }else {
+
+            }
+        }
+    }
+
+
+    public class PushNotification extends AsyncTask<Void,Void,Void > {
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            try {
+
+                URL url = new URL("https://fcm.googleapis.com/fcm/send");
+
+                HttpURLConnection conn =  (HttpURLConnection) url.openConnection();
+
+                conn.setUseCaches(false);
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Authorization", "key=AIzaSyDgdzjmis2Sv3YGfOPpWuQ_CsUKyrEidMU");
+                conn.setRequestProperty("Content-Type", "application/json");
+
+                JSONObject json = new JSONObject();
+
+
+                json.put("to", "/topics/" + "your_topic");
+
+
+
+
+
+
+                JSONObject info = new JSONObject();
+                info.put("title", "Item Reported");
+                info.put("body", "Kindly Check The Item Reported As Found If It Is Yours");
+                json.put("notification",info);
+
+
+
+
+
+
+                OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+                wr.write(json.toString());
+                wr.flush();
+                conn.getInputStream();
+            } catch (Exception e)
+            {
+                Log.d("Error", "" + e + ":" + e.getMessage());
+            }
+            return null;
+        }
+    }
 
 
 }

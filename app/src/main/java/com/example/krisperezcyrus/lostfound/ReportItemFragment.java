@@ -37,6 +37,7 @@ public class ReportItemFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
+
                 Intent i = new Intent(getActivity(),ILostActivity.class);
                 startActivity(i);
             }
